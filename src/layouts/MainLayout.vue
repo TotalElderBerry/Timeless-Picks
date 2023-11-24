@@ -1,7 +1,7 @@
 <template>
-<div class="bg-image">
+<div>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-transparent">
+    <q-header elevated reveal class="bg-transparent">
       <q-toolbar>
         <q-btn
           @click="toggleLeftDrawer"

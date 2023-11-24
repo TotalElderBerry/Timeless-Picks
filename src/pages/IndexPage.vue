@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'q-ma-md': $q.screen.lt.md, 'q-ma-xl': $q.screen.gt.sm }">
+  <q-page :class="{ 'q-ma-md': $q.screen.lt.md, 'q-ma-xl': $q.screen.gt.sm }">
     <div class="bg-banner q-pa-sm row flex-center" :class="{ 'height-lg': $q.screen.gt.md, 'height-md': $q.screen.lt.md }">
       <div class="items-center">
         <div class="text-center bg-primary text-white custom-border-radius text-weight-bold" :class="{ 'text-h4 q-pa-md': $q.screen.lt.lg, 'text-h2 q-pa-lg': $q.screen.gt.md }">
@@ -20,8 +20,29 @@
       <div class="col-sm-5">
         <CategoryItem />
       </div>
+       <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+      <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+       <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+      <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+      <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+      <div class="col-sm-5">
+        <CategoryItem />
+      </div>
+      <div class="col-sm-5">
+        <CategoryItem />
+      </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script setup>
