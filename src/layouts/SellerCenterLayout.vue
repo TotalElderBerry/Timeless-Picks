@@ -13,7 +13,7 @@
         />
         <img
           alt="Timeless Picks logo"
-          src="src/assets/tp-logo.png"
+          src="~assets/tp-logo.png"
           style="width: 50px; height: 50px;"
         >
 
@@ -38,7 +38,7 @@
           class="text-center"
           header
         >
-          <img src="src/assets/tp-logo.png" style="width: 150px"/>
+          <img src="~assets/tp-logo.png" style="width: 150px"/>
         </q-item-label>
         
         <EssentialLink v-bind="returnHome" :key="returnHome.title"/>
