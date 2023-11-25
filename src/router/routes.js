@@ -1,8 +1,8 @@
 const PageFilePaths = {
   HOME: import('../pages/IndexPage.vue'),
-  SELLER_CENTER: import('../pages/SellerCenterPage.vue'),
-  SELLER_CENTER_HOME: import('../pages/SCMyProductsPage.vue'),
-  SELLER_CENTER_ADD_PRODUCT: import('../pages/SCAddItemPage.vue'),
+  SELLER_CENTER: import('pages/SellerCenterPage.vue'),
+  SELLER_CENTER_HOME: import('pages/SCMyProductsPage.vue'),
+  SELLER_CENTER_ADD_PRODUCT: import('pages/SCAddItemPage.vue'),
 };
 
 const routes = [
