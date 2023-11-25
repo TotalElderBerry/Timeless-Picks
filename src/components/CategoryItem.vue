@@ -1,19 +1,33 @@
 <template>
-      <q-item>
-        <q-item-section>
-          <q-item-label class="text-weight-bold text-h6 text-center">Women's Apparel</q-item-label>
-        </q-item-section>
-      </q-item>
-      <div class="text-center">
-      	<img src="https://cdn.quasar.dev/img/parallax2.jpg"  style="width: 250px; height: 250px;" class="custom-border-radius">
+    <div>
+      <div class="q-mb-sm">
+        <div class="text-weight-bold text-center" :class="{ 'text-subtitle1': $q.screen.lt.md, 'text-h6': $q.screen.gt.sm }">{{props.category.name}}</div>
       </div>
+      <div class="text-center">
+      	<q-img :src="props.category.image"  class="custom-border-radius bg-green-2" :class="{ 'img-size-xs': $q.screen.lt.md , 'img-size-md': $q.screen.gt.sm }" />
+      </div>
+    </div>
 </template>
 
 <script setup>
+
+const props = defineProps(['category'])
 </script>
 
 <style>
 .custom-border-radius{
   border-radius:30px;
 }
+
+.img-size-xs{
+  width: 150px;
+  height: 150px
+}
+
+.img-size-md{
+  width: 200px;
+  height: 200px
+}
+
+
 </style>

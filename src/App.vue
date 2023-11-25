@@ -12,7 +12,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style scoped>
 .bg-image {
     background-image: url(assets/bg-1.png);
     background-repeat: no-repeat;

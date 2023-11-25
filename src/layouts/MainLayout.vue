@@ -16,10 +16,10 @@
         <img
           alt="Timeless Picks logo"
           src="~assets/tp-logo.png"
-          style="width: 70px; height: 70px;"
+          style="width: 50px; height: 50px;"
         >
 
-        <q-toolbar-title class="text-primary text-weight-bold" v-if="$q.screen.lt.md">
+        <q-toolbar-title class="text-primary text-weight-bold" v-if="$q.screen.lt.md" :class="{ 'text-subtitle1': $q.screen.lt.md, 'height-md': $q.screen.gt.md }">
           Timeless Picks
         </q-toolbar-title>
 
@@ -28,8 +28,8 @@
             {{ link.title }}
           </router-link>
         </div>
-        <q-toolbar-title>
-        </q-toolbar-title>
+          <q-toolbar-title v-if="$q.screen.gt.sm">
+          </q-toolbar-title>
         <q-btn flat round dense icon="notifications" color="primary" />
         <q-btn flat round dense icon="account_circle" color="primary" />
       </q-toolbar>
@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 const leftDrawerOpen = ref(false)
 
@@ -70,12 +70,12 @@ const linksList = [
   {
     title: 'HOME',
     icon: 'home',
-    link: ''
+    link: '/'
   },
   {
     title: 'SELLER CENTRE',
     icon: 'shop',
-    link: ''
+    link: 'sellercenter'
   },
   {
     title: 'PRIVACY',
@@ -109,12 +109,7 @@ const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 </script>
 
 <style scoped>
-.bg-image {
-    background-image: url(assets/bg-1.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-}
+
 .clickable-link {
   cursor: pointer;
   text-decoration: none; /* Remove underline */

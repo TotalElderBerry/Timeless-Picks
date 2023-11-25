@@ -2,8 +2,8 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    target="_self"
+    :to="link"
   >
     <q-item-section
       v-if="icon"
