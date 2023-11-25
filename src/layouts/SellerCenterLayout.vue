@@ -13,7 +13,7 @@
         />
         <img
           alt="Timeless Picks logo"
-          src="~assets/tp-logo.png"
+          src="src/assets/tp-logo.png"
           style="width: 50px; height: 50px;"
         >
 
