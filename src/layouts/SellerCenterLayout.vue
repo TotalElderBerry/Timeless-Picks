@@ -17,15 +17,10 @@
           style="width: 50px; height: 50px;"
         >
 
-        <q-toolbar-title class="text-primary text-weight-bold" v-if="$q.screen.lt.md" :class="{ 'text-subtitle1': $q.screen.lt.md, 'height-md': $q.screen.gt.md }">
+        <q-toolbar-title class="text-primary text-weight-bold" :class="{ 'text-subtitle1': $q.screen.lt.md, 'height-md': $q.screen.gt.md }">
           SELLER CENTER
         </q-toolbar-title>
 
-        <div v-else v-for="link in linksList" class="q-mx-lg">
-          <router-link :to="link.link" class="clickable-link text-primary text-weight-bold">
-            {{ link.title }}
-          </router-link>
-        </div>
           <q-toolbar-title v-if="$q.screen.gt.sm">
           </q-toolbar-title>
         <q-btn flat round dense icon="notifications" color="primary" />
@@ -46,6 +41,7 @@
           <img src="src/assets/tp-logo.png" style="width: 150px"/>
         </q-item-label>
         
+        <EssentialLink v-bind="returnHome" :key="returnHome.title"/>
 
         <SideBarSellerOptions
           v-for="option,key in options"
@@ -72,7 +68,14 @@
 <script setup>
 import { ref } from 'vue'
 import SideBarSellerOptions from 'components/SideBarSellerOptions.vue'
+import EssentialLink from 'components/EssentialLink.vue'
 const leftDrawerOpen = ref(true)
+
+const returnHome = {
+    title: 'Return to HOME',
+    icon: 'home',
+    link: '/'
+}
 
 const options = [
   {
@@ -96,8 +99,8 @@ const options = [
   {
     name: 'PRODUCT',
     subOptions: [
-      { name: 'My Products', route: '/my-products' },
-      { name: 'Add New Product', route: '/add-product' },
+      { name: 'My Products', route: 'my-products' },
+      { name: 'Add New Product', route: 'add-product' },
       { name: 'Suspended Products', route: '/suspended-products' }
     ],
     icon: 'sell'

@@ -26,7 +26,7 @@
           <q-input square outlined label="Password" dense />
 
           <div class="row">
-            <q-btn class="col q-my-sm" color="primary" dense>Login</q-btn>
+            <q-btn class="col q-my-sm" color="primary" dense @click="navigateToMyProducts">Login</q-btn>
           </div>
 
           <div class="row justify-between">
@@ -54,6 +54,14 @@
 </template>
 
 <script setup>
+  import {useRouter} from 'vue-router'
+
+  const router = useRouter()
+
+  const navigateToMyProducts = () => {
+    router.push({name: 'my-products'})
+  }
+
 </script>
 
 <style scoped>

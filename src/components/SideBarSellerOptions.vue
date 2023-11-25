@@ -9,11 +9,11 @@
         clickable
         tag="a"
         target="_self"
-        :to="props.option.link"
+        :to="sub.route"
         v-for="sub in props.option.subOptions"
       >
         <q-item-section>
-          <q-item-label>{{ sub .name}}</q-item-label>
+          <q-item-label>{{ sub.name}}</q-item-label>
         </q-item-section>
       </q-item>
     </q-expansion-item>
