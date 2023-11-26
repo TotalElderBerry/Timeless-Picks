@@ -1,7 +1,7 @@
 <template>
   <q-card class="product-item q-pa-xs q-my-sm">
     <q-img
-      src="~assets/cart-phone.png"
+      :src="product.image"
       alt="Product Image"
       :class="{ 'image': $q.screen.lt.sm, 'image-sm-up': $q.screen.gt.xs }"
     />
