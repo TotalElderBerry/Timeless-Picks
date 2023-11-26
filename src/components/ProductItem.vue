@@ -1,7 +1,7 @@
 <template>
   <q-card class="product-item q-pa-xs q-my-sm">
     <q-img
-      :src="product.image"
+      :src="icon"
       alt="Product Image"
       :class="{ 'image': $q.screen.lt.sm, 'image-sm-up': $q.screen.gt.xs }"
     />
@@ -19,8 +19,9 @@
 </template>
 
 <script setup>
+  import icon from 'assets/category-thumbs/women.png'
 const product = {
-  image: 'src/assets/category-thumbs/women.png',
+  image: '../../../src/assets/cart-phone.png',
   name: 'Women',
   price: 100,
   stock: 50,
