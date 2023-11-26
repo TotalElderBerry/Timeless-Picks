@@ -1,6 +1,6 @@
 {
-  "rewrites": [
-    { "source": "../../src/assets/(.*)", "destination": "/" },
-    { "source": "/(.*)", "destination": "/" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/" }
   ]
 }
