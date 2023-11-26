@@ -4,7 +4,7 @@
       type="text"
       placeholder="Search..."
       class="rounded-search-input"
-       :class="{ 'w-sm-and-down': $q.screen.lt.md, 'w-md-and-up': $q.screen.gt.sm }"
+      :class="{ 'w-sm-and-down': $q.screen.lt.md, 'w-md-and-up': $q.screen.gt.sm }"
     />
     <q-icon name="search" class="search-icon" />
   </div>
@@ -27,7 +27,7 @@
 
 .search-icon {
   position: absolute;
-  top: 35%;
+  top:50%;
   right: 10px; /* Adjust the right position as needed */
   transform: translateY(-50%);
   color: #666; /* Adjust the icon color as needed */
@@ -35,7 +35,7 @@
 
 .w-sm-and-down {
   padding: 8px;
-  font-size: 7px;
+  font-size: 10px;
   width: 200px; /* Adjust the width for medium screens and larger */
 }
 

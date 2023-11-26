@@ -1,6 +1,6 @@
 <template>
 <q-page>
-  <div class="row reverse items-center" style="height: 100vh">
+  <div class="row reverse items-center justify-between" style="height: 100vh">
    <div class="col-sm-12 col-md q-ma-md">
     <div class="text-weight-bold text-center" :class="{'text-h2 q-mb-lg': $q.screen.gt.sm, 'text-h6': $q.screen.lt.md}">
       Be a Sustainable Seller
@@ -49,6 +49,7 @@
         </div>
         <div class="text-center q-my-lg">New to Timeless Picks? <span class="text-weight-bold text-primary">Sign Up</span></div>
     </div>
+    <q-space />
   </div>
 </q-page>
 </template>

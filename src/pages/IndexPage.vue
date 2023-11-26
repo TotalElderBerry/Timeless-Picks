@@ -1,14 +1,14 @@
 <template>
-  <q-page :class="{ 'q-ma-sm': $q.screen.lt.md, 'q-ma-xl': $q.screen.gt.sm }">
+  <q-page :class="{ 'q-pa-sm': $q.screen.lt.md, 'q-pa-xl': $q.screen.gt.sm }">
     <div class="bg-banner q-pa-sm row flex-center" :class="{ 'height-sm': $q.screen.lt.md, 'height-md': $q.screen.gt.md }">
       <div class="items-center">
-        <div class="text-center bg-primary text-white custom-border-radius text-weight-bold" :class="{ 'text-h6 q-pa-xs': $q.screen.lt.md, 'text-h4 q-pa-lg': $q.screen.gt.sm }">
+        <div class="text-center bg-primary text-white custom-border-radius text-weight-bold" :class="{ 'text-h6 q-pa-sm': $q.screen.lt.md, 'text-h4 q-pa-lg': $q.screen.gt.sm }">
           Your Surplus, Their Treasures
         </div>
 
         <div class="row justify-center q-mt-md q-gutter-sm">
           <CustomInputBar />
-          <q-btn round text-color="black" icon="shopping_cart" color="white"/>
+          <q-btn round text-color="black" icon="shopping_cart" color="white" :size="$q.screen.lt.md ? 'xs':'md'"/>
         </div>
       </div>
     </div>
