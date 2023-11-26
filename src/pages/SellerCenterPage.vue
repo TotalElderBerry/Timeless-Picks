@@ -14,7 +14,7 @@
         <div class="my-font text-primary" style="font-size: 35px">TIMELESS PICKS</div>
         <div class="my-font text-overline text-primary">Online Shop</div>
       </div>
-      <q-img src="src/assets/cart-phone.png" style="width:300px"/>
+      <q-img src="~assets/cart-phone.png" style="width:300px"/>
     </div>
     </div>
    </div>
@@ -44,7 +44,7 @@
         <div class="row justify-between">
         <q-btn outline color="blue" icon="facebook">Facebook</q-btn>
         <q-btn outline color="red">
-          <img src="src/assets/google-icon.png" style="width: 20px; height: 20px; margin-right: 5px"/>
+          <img src="~assets/google-icon.png" style="width: 20px; height: 20px; margin-right: 5px"/>
         Google</q-btn>
         </div>
         <div class="text-center q-my-lg">New to Timeless Picks? <span class="text-weight-bold text-primary">Sign Up</span></div>
