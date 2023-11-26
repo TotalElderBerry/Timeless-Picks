@@ -20,7 +20,7 @@
 
 <script setup>
 const product = {
-  image: '~assets/cart-phone.png',
+  image: '../../src/assets/cart-phone.png',
   name: 'Women',
   price: 100,
   stock: 50,
