@@ -1,6 +1,6 @@
 {
   "rewrites": [
     { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/" }
+    { "source": "/.*", "destination": "/" }
   ]
 }
