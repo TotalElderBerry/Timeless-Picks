@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: PageFilePaths.HOME },
+      { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'sellercenter', component: PageFilePaths.SELLER_CENTER }
     ]
   },
