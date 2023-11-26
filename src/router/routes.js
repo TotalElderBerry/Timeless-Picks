@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '', component: () => PageFilePaths.HOME },
       { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER }
     ]
   },
@@ -18,8 +18,8 @@ const routes = [
     path: '/sellercenter/home/',
     component: () => import('layouts/SellerCenterLayout.vue'),
     children: [
-      { path: 'my-products', name: 'my-products', component: PageFilePaths.SELLER_CENTER_HOME },
-      { path: 'add-product', name: 'add-product',component: PageFilePaths.SELLER_CENTER_ADD_PRODUCT },
+      { path: 'my-products', name: 'my-products', component: () => PageFilePaths.SELLER_CENTER_HOME },
+      { path: 'add-product', name: 'add-product',component: () => PageFilePaths.SELLER_CENTER_ADD_PRODUCT },
     ]
   },
 
