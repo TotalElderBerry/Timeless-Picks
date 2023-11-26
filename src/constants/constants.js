@@ -1,4 +1,4 @@
-const categorythumbs = 'assets/category-thumbs/'
+const categorythumbs = 'src/assets/category-thumbs/'
 export const categories = [
 	{
 		name: "Women's Apparel",
