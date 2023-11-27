@@ -52,7 +52,7 @@
     </q-drawer>
 
     <q-page-container>
-       <q-tabs align="center" class="bg-white q-ma-md">
+       <q-tabs align="center" class="bg-white q-ma-md" v-if="showTabs">
         <q-route-tab to="/page1" label="ALL" />
         <q-route-tab to="/page2" label="LIVE" />
         <q-route-tab to="/page3" label="SOLDOUT" />
@@ -66,10 +66,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import { ref, computed } from 'vue'
 import SideBarSellerOptions from 'components/SideBarSellerOptions.vue'
 import EssentialLink from 'components/EssentialLink.vue'
 const leftDrawerOpen = ref(true)
+const route = useRoute()
+
+const showTabs = computed(() => route.name === 'my-products')
 
 const returnHome = {
     title: 'Return to HOME',
@@ -116,7 +120,7 @@ const options = [
   {
     name: 'CHAT BROADCAST',
     subOptions: [
-      { name: 'Chat', route: '/my-income' },
+      { name: 'Chat', route: 'chats' },
     ],
     icon: 'chat'
   },

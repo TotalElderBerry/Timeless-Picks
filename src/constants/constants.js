@@ -116,3 +116,21 @@ export const categoryProducts = [
   },
 ];
 
+
+export const chatTile = [
+  {
+      img: computer,
+      name: 'Brian',
+      product: 'Computer'
+  },
+  {
+    img: women,
+    name: 'Andrew',
+    product: 'Piso'
+  },
+  {
+    img: men,
+    name: 'John Cena',
+    product: 'My Dress'
+  }
+]
