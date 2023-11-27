@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-white q-pa-md q-ma-md q-gutter-md">
-    	<div class="text-weight-bold q-mx-xs">ADD PRODUCT</div>
+    	<div class="text-weight-bold q-mx-xs text-h5">ADD PRODUCT</div>
 
     	<div class="q-mx-xs">
     		<div>

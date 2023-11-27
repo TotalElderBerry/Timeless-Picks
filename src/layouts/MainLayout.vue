@@ -75,7 +75,7 @@ const linksList = [
   {
     title: 'SELLER CENTRE',
     icon: 'shop',
-    link: 'sellercenter'
+    link: '/sellercenter'
   },
   {
     title: 'PRIVACY',

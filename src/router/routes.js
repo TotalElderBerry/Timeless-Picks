@@ -3,6 +3,7 @@ const PageFilePaths = {
   SELLER_CENTER: import('pages/SellerCenterPage.vue'),
   SELLER_CENTER_HOME: import('pages/SCMyProductsPage.vue'),
   SELLER_CENTER_ADD_PRODUCT: import('pages/SCAddItemPage.vue'),
+  CATEGORY_PRODUCTS: import('pages/ProductsCategoryPage.vue'),
 };
 
 const routes = [
@@ -11,7 +12,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => PageFilePaths.HOME },
-      { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER }
+      { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER },
+      { path: 'category/:type', name: 'category' , component: () => PageFilePaths.CATEGORY_PRODUCTS }
     ]
   },
   {
