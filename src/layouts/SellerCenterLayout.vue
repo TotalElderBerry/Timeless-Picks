@@ -114,6 +114,13 @@ const options = [
     icon: 'store'
   },
   {
+    name: 'CHAT BROADCAST',
+    subOptions: [
+      { name: 'Chat', route: '/my-income' },
+    ],
+    icon: 'chat'
+  },
+  {
     name: 'FINANCE',
     subOptions: [
       { name: 'My Income', route: '/my-income' },

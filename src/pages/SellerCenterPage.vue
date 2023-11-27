@@ -1,25 +1,32 @@
 <template>
-<q-page>
-  <div class="row reverse items-center justify-between" style="height: 100vh">
+<q-page class="row items-center justify-center">
+  <div class="row reverse items-center justify-between">
+  
    <div class="col-sm-12 col-md q-ma-md">
-    <div class="text-weight-bold text-center" :class="{'text-h2 q-mb-lg': $q.screen.gt.sm, 'text-h6': $q.screen.lt.md}">
+    <div class="text-weight-bold text-center" :class="{'text-h4 q-mb-lg': $q.screen.gt.sm, 'text-h6': $q.screen.lt.md}">
       Be a Sustainable Seller
     </div>
-    <div class="text-subtitle1 text-center">
-      Give Your Treasures a New Chapter: Sell with Ease, Trade with Thrift.
-    </div>
-    <div class="row justify-center">
-    <div class="row gt-md inline items-center text-center">
-      <div class="text-center">
-        <div class="my-font text-primary" style="font-size: 35px">TIMELESS PICKS</div>
-        <div class="my-font text-overline text-primary">Online Shop</div>
+
+    <div class="row items-center justify-center">
+      <div class="col-md-9 text-subtitle1 text-center">
+        Give Your Treasures a New Chapter: Sell with Ease, Trade with Thrift.
       </div>
-      <q-img src="~assets/cart-phone.png" style="width:300px"/>
     </div>
-    </div>
+    
+    <div class="row q-mt-md">
+      <div class="row gt-md inline q-mt-xl" style="position: relative">
+        <div class="text-center">
+          <div class="my-font text-primary" style="font-size: 35px">TIMELESS PICKS</div>
+          <div class="my-font text-overline text-primary">Online Shop</div>
+        </div>
+        <div class="col-8" style="position: absolute; top: 50%; left: 100%; transform: translate(-50%, -50%); z-index: 2;">
+          <q-img src="~assets/cart-phone.png" style="width:300px"/>
+        </div>
+      </div>
+      </div>
    </div>
 
-    <div class="bg-white q-ma-lg col-sm-11 col-md-5" :class="{'q-pa-xl': $q.screen.gt.xs, 'q-pa-md': $q.screen.lt.sm}">
+    <div class="bg-white q-ma-lg col-sm col-xs col-md-5" :class="{'q-pa-xl': $q.screen.gt.xs, 'q-pa-md': $q.screen.lt.sm}">
       <div class="text-h5 text-weight-bold">Log In </div>
         <q-form class="q-ma-sm q-gutter-sm">
           <q-input square outlined label="Email / Username" dense />
@@ -41,7 +48,7 @@
 
         <p ><span class="line">OR</span></p>
 
-        <div class="row justify-between">
+        <div class="row justify-center q-gutter-md">
         <q-btn outline color="blue" icon="facebook">Facebook</q-btn>
         <q-btn outline color="red">
           <img src="~assets/google-icon.png" style="width: 20px; height: 20px; margin-right: 5px"/>
@@ -49,7 +56,7 @@
         </div>
         <div class="text-center q-my-lg">New to Timeless Picks? <span class="text-weight-bold text-primary">Sign Up</span></div>
     </div>
-    <q-space />
+
   </div>
 </q-page>
 </template>
