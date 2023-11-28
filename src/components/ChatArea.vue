@@ -2,7 +2,7 @@
   <div class="q-pa-md q-ma-md row">
     <div style="width: 100%;" >
       <div v-for="(message, index) in messages" :key="index">
-        <q-chat-message :text="[message.text]" :sent="message.sent" />
+        <q-chat-message :text="[message.text]" :sent="message.sent" :bg-color="message.sent ? 'amber-4':''"/>
       </div>
     </div>
   </div>
