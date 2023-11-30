@@ -47,7 +47,7 @@ export const categoryProducts = [
       {
         name: 'dresses',
         images: [
-          { label: 'Short Dresses', img: women },
+          { id: 'shortdresses', label: 'Short Dresses', img: women },
           { label: 'Floral Dresses', img: men },
           { label: 'Elegant Dresses', img: men },
           { label: 'Boho Dresses', img: men },
@@ -114,6 +114,34 @@ export const categoryProducts = [
       },
     ]
   },
+];
+
+export const productsByCategory = [
+  {
+    category: 'dresses',
+    subcategory: [
+      {
+        name: 'shortdresses',
+        products: [
+          {
+            name: 'Floral Short Dress',
+            img: 'https://picsum.photos/200/300?random=1'
+          },
+          {
+            name: 'Elegant Short Dress',
+            img: 'https://picsum.photos/200/300?random=2'
+          },
+          {
+            name: 'Boho Short Dress',
+            img: 'https://picsum.photos/200/300?random=3'
+          },
+          // Add more short dresses as needed
+        ]
+      },
+      // Add more subcategories as needed
+    ]
+  },
+  // Add more categories as needed
 ];
 
 

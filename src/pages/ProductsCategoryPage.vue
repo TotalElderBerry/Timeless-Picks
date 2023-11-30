@@ -13,7 +13,7 @@
         <div class="row q-py-md" v-for="product in products.products">
             <div class="col-xs-12 col-sm-4 flex flex-center text-weight-bold q-py-xs">{{product.name.toUpperCase()}}</div>
             <div class="row q-gutter-md col-sm-8">
-            <div v-for="image in product.images">
+            <div v-for="image in product.images" @click="() => routeProducts(image.id)">
                 <q-img :src="image.img" class="custom-border-radius bg-white" :class="{ 'img-size-xs': $q.screen.lt.md , 'img-size-md': $q.screen.gt.sm }"/>
                 <div class="text-center text-green-8 text-weight-bold" style="font-size: 12px">{{image.label}}</div>
             </div>
@@ -33,9 +33,13 @@ const handleClick = (route) => {
   router.push({name: 'category', params: {type: route}})
 }
 
+const routeProducts = (route) => {
+    console.log(route)
+    router.push({name: 'products-category', params: {category: route}})
+}
+
 watch(() => route.params, ()=>{
     products.value = categoryProducts.filter((category) => category.id === route.params.type)[0] 
-    console.log(products.value)
 })
 
 onMounted(()=>{
