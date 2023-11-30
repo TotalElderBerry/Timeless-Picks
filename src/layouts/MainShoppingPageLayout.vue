@@ -1,6 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header elevated reveal class="bg-transparent">
+      
       <q-toolbar>
         <q-btn
           @click="toggleLeftDrawer"
@@ -11,6 +12,12 @@
           icon="menu"
           aria-label="Menu"
         />
+        <img
+          alt="Timeless Picks logo"
+          src="~assets/tp-logo.png"
+          @click="routeToHome"
+          style="width: 50px; height: 50px;"
+        >
 
         <div class="row justify-end" style="width: 100%">
           <CustomInputBar />
@@ -19,8 +26,7 @@
 
           <q-toolbar-title>
           </q-toolbar-title>
-        <q-btn flat round dense icon="notifications" color="primary" />
-        <q-btn flat round dense icon="account_circle" color="primary" />
+        <q-btn flat round dense icon="shopping_cart" color="primary" />
       </q-toolbar>
     </q-header>
 
@@ -32,12 +38,12 @@
     >
 
     <div class="row justify-center">
-        <img
-          alt="Timeless Picks logo"
-          src="~assets/tp-logo.png"
-          style="width: 180px; height: 180px;"
-        >
-    </div>
+        <q-img
+        alt="Timeless Picks logo"
+        src="~assets/tp-logo.png"
+        style="width: 180px; height: 180px;"
+        />
+      </div>
 
     <div class="row items-center">
       <div class="text-h6 text-weight-bold">Filter</div>
@@ -49,6 +55,29 @@
         <q-checkbox v-for="sub in filter.subOptions" :label="sub.label" v-model="sub.isSelected">
 
         </q-checkbox>
+      </q-expansion-item>
+
+      <q-expansion-item
+       label="PRICE"
+      >
+      <div class="q-mx-md">
+        <div class="row items-center ">
+          <div class="text-weight-bold col-4">Price From</div>
+          <q-input dense outlined v-model="label.min" label="" class="col-5"/>
+        </div>
+        <div class="row items-center q-mt-xs">
+          <div class="text-weight-bold col-4">Price To</div>
+          <q-input dense outlined v-model="label.max" label="" class="col-5"/>
+        </div>
+        <q-range
+          v-model="label"
+          :min="0"
+          :max="15000"
+          :step="4"
+          label
+          color="purple"
+        />
+      </div>
       </q-expansion-item>
 
     </q-drawer>
@@ -70,19 +99,21 @@
 <script setup>
 import {useRoute, useRouter} from 'vue-router'
 import { ref, computed } from 'vue'
-import SideBarSellerOptions from 'components/SideBarSellerOptions.vue'
-import EssentialLink from 'components/EssentialLink.vue'
 import CustomInputBar from 'components/CustomInputBar.vue'
 const leftDrawerOpen = ref(true)
 const route = useRoute()
+const router = useRouter()
 
 const showTabs = computed(() => route.name === 'my-products')
 
-const returnHome = {
-    title: 'Return to HOME',
-    icon: 'home',
-    link: '/'
+const label = ref({
+  min: 12, max: 1400
+})
+
+const routeToHome = () => {
+  router.push('/')
 }
+
 const options = ref([
   {
     name: 'TYPE',
