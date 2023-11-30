@@ -12,7 +12,6 @@
 <script setup>
 import {onMounted} from 'vue'
 const props = defineProps(['detail'])
-console.log(props.detail)
 </script>
 
 <style scoped>

@@ -1,10 +1,18 @@
 <template>
-  <div class="q-pa-md q-ma-md row">
-    <div style="width: 100%;" >
-      <div v-for="(message, index) in messages" :key="index">
-        <q-chat-message :text="[message.text]" :sent="message.sent" :bg-color="message.sent ? 'amber-4':''"/>
+<div class="row">
+  <div class="col-12" style="display: flex; flex-direction: column; height: 100%;">
+    <div class="q-pa-md" style="flex: 3; overflow-y: auto;">
+      <div>
+        <div v-for="(message, index) in messages" :key="index">
+          <q-chat-message :text="[message.text]" :sent="message.sent" :bg-color="message.sent ? 'amber-4' : ''" />
+        </div>
       </div>
     </div>
+    <div class="col-12 row bg-white">
+      <q-input v-model="newMessage" class="col-11 q-px-md" placeholder="Type your message..." dense />
+      <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
+    </div>
+  </div>
   </div>
 </template>
 
@@ -21,8 +29,8 @@ const messages = ref([
 const newMessage = ref('');
 
 const sendMessage = () => {
-  if (newMessage.trim() !== '') {
-    messages.value.push({ text: newMessage, sent: true });
+  if (newMessage.value.trim() !== '') {
+    messages.value.push({ text: newMessage.value, sent: true });
     newMessage.value = '';
   }
 };
