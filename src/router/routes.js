@@ -8,6 +8,7 @@ const PageFilePaths = {
   SELLER_CENTER_ORDERS: import('pages/SCOrdersPage.vue'),
   CATEGORY_PRODUCTS: import('pages/ProductsCategoryPage.vue'),
   PRODUCTS_OF_CATEGORY: import('pages/ProductsPage.vue'),
+  PRODUCT_DETAILS: import('pages/ProductDetailsPage.vue'),
 };
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
     component: () => import('layouts/MainShoppingPageLayout.vue'),
     children: [
       { path: ':category', name: 'products-category', component: () => PageFilePaths.PRODUCTS_OF_CATEGORY },
+      { path: 'item/:id', name: 'product', component: () => PageFilePaths.PRODUCT_DETAILS },
     ]
   },
 

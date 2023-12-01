@@ -94,8 +94,7 @@ const options = [
   {
     name: 'ORDER',
     subOptions: [
-      { name: 'My Orders', route: 'orders' },
-      { name: 'Cancellation', route: '/cancellation' },
+      { name: 'Orders', route: 'orders' },
       { name: 'Return/Refund', route: '/return-refund' }
     ],
     icon: 'shopping_cart'
