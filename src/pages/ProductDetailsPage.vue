@@ -14,19 +14,23 @@
             height="350px"
             class="bg-green-4 text-white shadow-1 rounded-borders col-md-4"
         >
-        <q-carousel-slide name="style" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
-              <img src="https://cdn.quasar.dev/img/mountains.jpg" style="width: 100%">
-          </div>
+        <q-carousel-slide name="style" class="column no-wrap flex-center" >
+              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%; height: auto; object-fit: contain">
         </q-carousel-slide>
         <q-carousel-slide name="tv" class="column no-wrap flex-center">
-          <q-icon name="live_tv" size="56px" />
+          <div class="q-mt-md text-center">
+              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
+          </div>
         </q-carousel-slide>
         <q-carousel-slide name="layers" class="column no-wrap flex-center">
-          <q-icon name="layers" size="56px" />
+          <div class="q-mt-md text-center">
+              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
+          </div>
         </q-carousel-slide>
         <q-carousel-slide name="map" class="column no-wrap flex-center">
-          <q-icon name="terrain" size="56px" />
+          <div class="q-mt-md text-center">
+              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
+          </div>
         </q-carousel-slide>
       </q-carousel>
 
