@@ -48,40 +48,40 @@ export const categoryProducts = [
         name: 'dresses',
         images: [
           { id: 'shortdresses', label: 'Short Dresses', img: women },
-          { label: 'Floral Dresses', img: men },
-          { label: 'Elegant Dresses', img: men },
-          { label: 'Boho Dresses', img: men },
-          { label: 'Long Dresses', img: men },
+          { id: 'shortdresses',label: 'Floral Dresses', img: men },
+          { id: 'shortdresses',label: 'Elegant Dresses', img: men },
+          { id: 'shortdresses',label: 'Boho Dresses', img: men },
+          { id: 'shortdresses',label: 'Long Dresses', img: men },
         ]
       },
       {
         name: 'tops',
         images: [
-          { label: 'Tank Tops', img: women },
-          { label: 'Blouses', img: men },
-          { label: 'T-Shirts', img: men },
-          { label: 'Camisole', img: men },
-          { label: 'Other Tops', img: men },
+          { id: 'shortdresses',label: 'Tank Tops', img: women },
+          { id: 'shortdresses',label: 'Blouses', img: men },
+          { id: 'shortdresses',label: 'T-Shirts', img: men },
+          { id: 'shortdresses',label: 'Camisole', img: men },
+          { id: 'shortdresses',label: 'Other Tops', img: men },
         ]
       },
       {
         name: 'bottoms',
         images: [
-          { label: 'Jeans', img: women },
-          { label: 'Denim Shorts', img: women },
-          { label: 'Skirts', img: women },
-          { label: 'Leggings', img: women },
-          { label: 'Coords', img: men }
+          { id: 'shortdresses',label: 'Jeans', img: women },
+          { id: 'shortdresses',label: 'Denim Shorts', img: women },
+          { id: 'shortdresses',label: 'Skirts', img: women },
+          { id: 'shortdresses',label: 'Leggings', img: women },
+          { id: 'shortdresses',label: 'Coords', img: men }
         ]
       },
       {
         name: 'sweaters & cardigans',
         images: [
-          { label: 'Sweaters', img: women },
-          { label: 'Cardigans', img: women },
-          { label: 'Sweatpants', img: women },
-          { label: 'Hoodies', img: women },
-          { label: 'Jackets', img: men }
+          { id: 'shortdresses',label: 'Sweaters', img: women },
+          { id: 'shortdresses',label: 'Cardigans', img: women },
+          { id: 'shortdresses',label: 'Sweatpants', img: women },
+          { id: 'shortdresses',label: 'Hoodies', img: women },
+          { id: 'shortdresses',label: 'Jackets', img: men }
         ]
       },
     ]
@@ -94,22 +94,22 @@ export const categoryProducts = [
       {
         name: 'tops',
         images: [
-          { label: 'Label9', img: women },
-          { label: 'Label10', img: men }
+          { id: 'shortdresses',label: 'Label9', img: women },
+          { id: 'shortdresses',label: 'Label10', img: men }
         ]
       },
       {
         name: 'bottoms',
         images: [
-          { label: 'Label11', img: women },
-          { label: 'Label12', img: men }
+          { id: 'shortdresses',label: 'Label11', img: women },
+          { id: 'shortdresses',label: 'Label12', img: men }
         ]
       },
       {
         name: 'hoodies & sweatshirts',
         images: [
-          { label: 'Label13', img: women },
-          { label: 'Label14', img: men }
+          { id: 'shortdresses',label: 'Label13', img: women },
+          { id: 'shortdresses',label: 'Label14', img: men }
         ]
       },
     ]

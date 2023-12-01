@@ -34,7 +34,6 @@ const handleClick = (route) => {
 }
 
 const routeProducts = (route) => {
-    console.log(route)
     router.push({name: 'products-category', params: {category: route}})
 }
 
