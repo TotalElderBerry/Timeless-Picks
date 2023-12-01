@@ -1,5 +1,5 @@
 <template>
-    <div class="q-pa-md row" style="max-width:1200px; margin-left: auto; margin-right: auto">
+    <div class="q-pa-md row" style="max-width:1000px; margin-left: auto; margin-right: auto">
      <q-card class="my-card row" flat bordered>
         <q-carousel
             v-model="slide"
