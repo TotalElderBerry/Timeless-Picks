@@ -80,7 +80,7 @@
             <q-btn label="Chat" class=" text-caption bg-secondary text-white" style="font-size: 10px"/>
             <q-btn outlined label="Add to Cart" icon="shopping_cart" class=" text-caption bg-secondary text-white" style="font-size: 10px"/>
             </div>
-            <q-btn label="Buy Now" class="col bg-primary text-white"/>
+            <q-btn @click="routeToCheckout" label="Buy Now" class="col bg-primary text-white"/>
         </q-card-section>
       </q-card-section>
     </q-card>
