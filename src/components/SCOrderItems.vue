@@ -3,10 +3,11 @@
         <q-card class="my-card" flat bordered style="width: 100%">
             <q-card-section horizontal>
             
-            <q-card-section class="col-xs-4 col-md-2 flex flex-center">
+            <q-card-section class="col-xs-4 col-sm-2 col-md-3 ">
                 <q-img
                 class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494"
+                style="max-width: 150px; max-height: 100%;"
                 />
             </q-card-section>
 
