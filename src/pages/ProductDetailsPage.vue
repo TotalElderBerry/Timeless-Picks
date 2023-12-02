@@ -102,19 +102,23 @@
             </div>
     </div>
 
-
     </div>
     <div class="absolute-bottom fixed-bottom bg-white row lt-md inline" style="position:sticky; width: 100%">
       <q-btn label="Chat" class="col-3 text-caption bg-secondary text-white"/>
       <q-btn label="Add to Cart" class="col-3 text-caption bg-secondary text-white" style="font-size: 10px"/>
-      <q-btn label="Buy Now" icon="update" class="col bg-primary text-white"/>
+      <q-btn @click="routeToCheckout" label="Buy Now" icon="update" class="col bg-primary text-white"/>
     </div>
 </template>
 
 <script setup>
 import {ref} from 'vue'
-    import ProductItem from 'src/components/ProductItem.vue';
-
+import {useRouter} from 'vue-router'
+import ProductItem from 'src/components/ProductItem.vue';
+const router = useRouter()
 const slide = ref('style')
+
+const routeToCheckout = () => {
+    router.push({name: 'checkout', params: {id: 1}})
+}
 
 </script>

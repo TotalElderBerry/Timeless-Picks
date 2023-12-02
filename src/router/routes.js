@@ -9,6 +9,8 @@ const PageFilePaths = {
   CATEGORY_PRODUCTS: import('pages/ProductsCategoryPage.vue'),
   PRODUCTS_OF_CATEGORY: import('pages/ProductsPage.vue'),
   PRODUCT_DETAILS: import('pages/ProductDetailsPage.vue'),
+  CHECKOUT: import('pages/CheckoutPage.vue'),
+  CHECKOUT_MESSAGE: import('pages/SuccessfulCheckoutPage.vue'),
 };
 
 const routes = [
@@ -16,7 +18,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => PageFilePaths.HOME },
+      { path: '', name:'home', component: () => PageFilePaths.HOME },
       { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER },
       { path: 'category/:type', name: 'category' , component: () => PageFilePaths.CATEGORY_PRODUCTS }
     ]
@@ -38,6 +40,8 @@ const routes = [
     children: [
       { path: ':category', name: 'products-category', component: () => PageFilePaths.PRODUCTS_OF_CATEGORY },
       { path: 'item/:id', name: 'product', component: () => PageFilePaths.PRODUCT_DETAILS },
+      { path: 'checkout/:id', name: 'checkout', component: () => PageFilePaths.CHECKOUT },
+      { path: 'checkout/success', name: 'checkout-success', component: () => PageFilePaths.CHECKOUT_MESSAGE },
     ]
   },
 
