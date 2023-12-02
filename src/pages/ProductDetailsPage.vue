@@ -12,7 +12,7 @@
             padding
             arrows
             height="350px"
-            class="bg-green-4 text-white shadow-1 rounded-borders col-md-4"
+            class="bg-green-4 text-white shadow-1 rounded-borders col-md-4 col-sm-12"
         >
         <q-carousel-slide name="style" class="column no-wrap flex-center" >
               <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%; height: auto; object-fit: contain">
