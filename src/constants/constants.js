@@ -37,6 +37,23 @@ import hs1 from 'assets/mens-apparel/8.png'
 import hs2 from 'assets/mens-apparel/9.png'
 import hs3 from 'assets/mens-apparel/10.png'
 
+import children1 from 'assets/children/children1.jpg'
+import children2 from 'assets/children/children2.png'
+import children3 from 'assets/children/children3.png'
+
+import gadget1 from 'assets/gadgets/1.png'
+import gadget2 from 'assets/gadgets/2.jpeg'
+import gadget3 from 'assets/gadgets/3.jpg'
+import gadget4 from 'assets/gadgets/4.png'
+
+import computer1 from 'assets/computers/1.jpeg'
+import computer2 from 'assets/computers/2.jpeg'
+import computer3 from 'assets/computers/3.png'
+
+import books1 from 'assets/books/1.jpeg'
+import books2 from 'assets/books/2.jpeg'
+import books3 from 'assets/books/3.jpeg'
+
 export const categories = [
   {
     name: "Women's Apparel",
@@ -146,6 +163,81 @@ export const categoryProducts = [
           { id: 'shortdresses',label: 'Hoodies', img: hs1 },
           { id: 'shortdresses',label: 'Sweatshirts', img: hs2 },
           { id: 'shortdresses',label: 'Sweater', img: hs3 }
+        ]
+      },
+    ]
+  },
+  {
+    id: 'children',
+    name: "Children",
+    productsCategory: ["CHILDREN"],
+    products: [
+      {
+        name: 'Apparel',
+        images: [
+          { id: 'children', label: 'Polo', img: children1 },
+          { id: 'children', label: 'Shorts', img: children2 },
+        ]
+      },
+      {
+        name: 'toys',
+        images: [
+          { id: 'children', label: 'Stuff Toys', img: children3 },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'gadget',
+    name: "Gadget",
+    productsCategory: ["GADGET"],
+    products: [
+      {
+        name: 'phone',
+        images: [
+          { id: 'gadget', label: 'Android', img: gadget1 },
+          { id: 'gadget', label: 'IPhone', img: gadget2 },
+          // Add more gadget products as needed
+        ]
+      },
+      {
+        name: 'watches',
+        images: [
+          { id: 'gadget', label: 'Garmin', img: gadget3 },
+          { id: 'gadget', label: 'Apple', img: gadget4 },
+          // Add more gadget products as needed
+        ]
+      },
+    ]
+  },
+  {
+    id: 'computer',
+    name: "Computer",
+    productsCategory: ["COMPUTER"],
+    products: [
+      {
+        name: 'computer',
+        images: [
+          { id: 'computer', label: 'Laptops', img: computer1 },
+          { id: 'computer', label: 'Desktops', img: computer2 },
+          { id: 'computer', label: 'Computer Accessories', img: computer3 },
+          // Add more computer products as needed
+        ]
+      },
+    ]
+  },
+  {
+    id: 'books',
+    name: "Books",
+    productsCategory: ["BOOKS"],
+    products: [
+      {
+        name: 'books',
+        images: [
+          { id: 'books', label: 'Fiction', img: books1 },
+          { id: 'books', label: 'Non-fiction', img: books2 },
+          { id: 'books', label: 'Children\'s Books', img: books3 },
+          // Add more book products as needed
         ]
       },
     ]

@@ -30,7 +30,7 @@
 
         <div class="row no-wrap items-center">
           <q-rating size="18px" v-model="stars" :max="5" color="primary" />
-          <span class="text-caption text-grey q-ml-sm">4.2 (551)</span>
+          <span class="text-caption text-grey q-ml-sm">{{stars}} (551)</span>
         </div>
         <q-card flat bordered class="q-mt-xs q-px-sm">
             <div class="row justify-between items-center q-pa-xs q-gutter-sm">
@@ -105,6 +105,7 @@ const route = useRoute()
 const slide = ref(0)
 const currentProduct = ref()
 const otherProducts = ref()
+const stars = ref(4.2)
 watch(() => route.params.id,() => {
     otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
     currentProduct.value = getProduct()

@@ -80,7 +80,7 @@
         </div>
         <div class="row justify-between">
             <div class="text-grey-9 text-weight-bold" style="font-size: 15px">Total Amount</div>
-            <div class="text-weight-bold text-primary" style="font-size: 15px">${{currentProduct.price + 10}}</div>
+            <div class="text-weight-bold text-primary" style="font-size: 15px">${{parseInt(currentProduct.price) + 10}}</div>
         </div>
     </q-card-section>
 </q-card>
@@ -89,7 +89,7 @@
 <div class="absolute-bottom bg-white row inline row" style="width: 100%; bottom: 0;">
     <div class="col-7 text-right q-pr-sm">
         <div class="text-grey-8">Total Amount</div>
-        <div class="text-weight-bold text-primary">${{currentProduct.price + 10}}</div>
+        <div class="text-weight-bold text-primary">${{parseInt(currentProduct.price) + 10}}</div>
     </div>
     <q-btn @click="routeToCheckoutSuccess" label="Place Order" class="col bg-primary text-white"/>
 </div>
