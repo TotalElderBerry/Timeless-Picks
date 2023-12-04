@@ -28,12 +28,12 @@
   <q-card-section horizontal>
     <q-img
       class="col-2 q-ml-sm q-mt-sm q-mb-sm"
-      src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494"
-      style="max-width: 150px; max-height: 100%;"
+      :src="currentProduct.img[0]"
+      style="max-width: 150px; max-height: 150px;"
     />
     <q-card-section>
-      <div class="text-subtitle1" style="font-size: 14px">Nice dress from California</div>
-      <div class="text-grey-8" style="font-size: 12px">$1000</div>
+      <div class="text-subtitle1" style="font-size: 14px">{{currentProduct.name}}</div>
+      <div class="text-grey-8" style="font-size: 12px">${{currentProduct.price}}</div>
     </q-card-section>
   </q-card-section>
 </q-card>
@@ -72,7 +72,7 @@
     <q-card-section class="q-gutter-sm">
         <div class="row justify-between">
             <div class="text-grey-9" style="font-size: 12px">Merchandise Subtotal</div>
-            <div class="text-grey-9" style="font-size: 12px">$1000</div>
+            <div class="text-grey-9" style="font-size: 12px">${{currentProduct.price}}</div>
         </div>
         <div class="row justify-between">
             <div class="text-grey-9" style="font-size: 12px">Shipping free</div>
@@ -80,7 +80,7 @@
         </div>
         <div class="row justify-between">
             <div class="text-grey-9 text-weight-bold" style="font-size: 15px">Total Amount</div>
-            <div class="text-weight-bold text-primary" style="font-size: 15px">$1000</div>
+            <div class="text-weight-bold text-primary" style="font-size: 15px">${{currentProduct.price + 10}}</div>
         </div>
     </q-card-section>
 </q-card>
@@ -89,15 +89,25 @@
 <div class="absolute-bottom bg-white row inline row" style="width: 100%; bottom: 0;">
     <div class="col-7 text-right q-pr-sm">
         <div class="text-grey-8">Total Amount</div>
-        <div class="text-weight-bold text-primary">$133910</div>
+        <div class="text-weight-bold text-primary">${{currentProduct.price + 10}}</div>
     </div>
     <q-btn @click="routeToCheckoutSuccess" label="Place Order" class="col bg-primary text-white"/>
 </div>
 </template>
 
 <script setup>
-import {useRouter} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
+import {useProductStore} from 'src/stores/products.js'
+const products = useProductStore()
 const router = useRouter()
+const route = useRoute()
+
+const getProduct = () => {
+    if(route.params.id > -1 && route.params.id <= products.products.length){
+        return products.products[route.params.id - 1]
+    }
+}
+const currentProduct = getProduct()
 
 const routeToCheckoutSuccess = () => {
     router.push('success')

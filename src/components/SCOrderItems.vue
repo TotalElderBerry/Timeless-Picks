@@ -6,13 +6,13 @@
             <q-card-section class="col-xs-4 col-sm-2 col-md-3 ">
                 <q-img
                 class="rounded-borders"
-                src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494"
-                style="max-width: 150px; max-height: 100%;"
+                :src="props.order.img[0]"
+                style="max-width: 150px; max-height: 150px;"
                 />
             </q-card-section>
 
             <q-card-section class="q-pt-xs col">
-                <div class="text-h6 q-mt-sm q-mb-xs">Women's Dress</div>
+                <div class="text-h6 q-mt-sm q-mb-xs">{{props.order.name}}</div>
                 <div class="text-caption text-grey">
                     Ordered by - Brian Keith Lisondra ( @brianzl1 )
                 </div>
@@ -20,7 +20,8 @@
 
             <q-card-section class="gt-xs inline">
                 <q-card-actions>
-                    <q-select v-model="model" :options="options" label="Action" />
+                    <q-select v-if="isRejected" disable v-model="model" :options="options" label="Action" />
+                    <q-select v-else v-model="model" :options="options" label="Action" />
                 </q-card-actions>
             </q-card-section>
   
@@ -29,7 +30,8 @@
         <q-separator />
 
         <q-card-section class="lt-sm inline">
-            <q-select v-model="model" :options="options" label="Action" />
+            <q-select v-if="isRejected" disable v-model="model" :options="options" label="Action" />
+            <q-select v-else v-model="model" :options="options" label="Action" />
         </q-card-section>
   
       </q-card>
@@ -38,7 +40,18 @@
   </template>
 
 <script setup>
-    import { ref } from "vue";
+    import { ref, watch } from "vue";
     const options = ref(['CONFIRM', 'REJECT'])
+    const props = defineProps(['order'])
     const model = ref('Action')
+    const isRejected = ref(false)
+    watch(() => props.order, () => {
+        if(props.order.status === 'rejected'){
+            isRejected.value = true
+            model.value = 'REJECTED'
+        }else{
+            isRejected.value = false
+            model.value = "Action"
+        }
+    })
 </script>

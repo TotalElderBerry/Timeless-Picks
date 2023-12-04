@@ -14,29 +14,19 @@
             height="350px"
             class="bg-green-4 text-white shadow-1 rounded-borders col-md-4 col-sm-12"
         >
-        <q-carousel-slide name="style" class="column no-wrap flex-center" >
-              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%; height: auto; object-fit: contain">
-        </q-carousel-slide>
-        <q-carousel-slide name="tv" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
-              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="layers" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
-              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="map" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
-              <img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/458115/item/phgoods_12_458115.jpg?width=494" style="width: 100%">
-          </div>
+        <q-carousel-slide v-for="img,key in currentProduct.img" :name="key" class="column no-wrap flex-center">
+            <div style="width: 100%;">
+                <img
+                :src="img"
+                style="width: 100%; height: auto; object-fit: contain; min-width: 210px; min-height: 150px;"
+                />
+            </div>
         </q-carousel-slide>
       </q-carousel>
 
       <q-card-section class="col-xs-12 col-md-7">
-        <div class="text-h6 q-mb-xs">Nice Dress</div>
-        <div class="text-subtitle1 q-mb-xs text-green text-weight-bolder">$100</div>
+        <div class="text-h6 q-mb-xs">{{currentProduct.name}}</div>
+        <div class="text-subtitle1 q-mb-xs text-green text-weight-bolder">${{currentProduct.price}}</div>
 
         <div class="row no-wrap items-center">
           <q-rating size="18px" v-model="stars" :max="5" color="primary" />
@@ -92,13 +82,7 @@
             Other Products
         </div>
          <div class="row justify-center q-gutter-xs">
-                <ProductItem :inProducts="true" class="" @click="routeToProductPage" style="cursor: pointer"/>
-                <ProductItem :inProducts="true" class=""/>
-                <ProductItem :inProducts="true" class=""/>
-                <ProductItem :inProducts="true" class=""/>
-                <ProductItem :inProducts="true" class=""/>
-                <ProductItem :inProducts="true" class=""/>
-                <ProductItem :inProducts="true" class=""/>
+                <ProductItem v-for="pr in otherProducts" :product="pr" :inProducts="true" class="" @click="routeToProductPage" style="cursor: pointer"/>
             </div>
     </div>
 
@@ -111,12 +95,24 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import {useRouter} from 'vue-router'
+import {ref,computed} from 'vue'
+import {useRoute,useRouter} from 'vue-router'
 import ProductItem from 'src/components/ProductItem.vue';
+import {useProductStore} from 'src/stores/products.js'
+const products = useProductStore()
 const router = useRouter()
-const slide = ref('style')
+const route = useRoute()
+const slide = ref(0)
 
+const otherProducts = computed(() => products.products.filter(pr => pr.id != route.params.id))
+const getProduct = () => {
+    if(route.params.id > -1 && route.params.id <= products.products.length){
+        return products.products[route.params.id - 1]
+    }
+}
+
+const currentProduct = getProduct()
+console.log(currentProduct.img)
 const routeToCheckout = () => {
     router.push({name: 'checkout', params: {id: 1}})
 }

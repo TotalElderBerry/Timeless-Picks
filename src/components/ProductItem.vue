@@ -1,8 +1,8 @@
 <template>
   <q-card class="q-my-xs">
-    <div class="row justify-center">
+    <div class="row justify-center q-pt-sm">
       <q-img
-        :src="icon"
+        :src="product.img"
         alt="Product Image"
         :class="{ 'image': $q.screen.lt.sm, 'image-sm-up': $q.screen.gt.xs }"
       />
@@ -23,10 +23,9 @@
 <script setup>
   import icon from 'assets/category-thumbs/women.png'
   import {computed} from 'vue'
-  const props = defineProps(['inProducts'])
+  const props = defineProps(['inProducts','product'])
   const inProduct = computed(() => props.inProducts != undefined || props.inProducts == true?true:false)
-
-  const product = {
+  let product = {
     image: '../../../src/assets/cart-phone.png',
     name: 'Women',
     price: 100,
@@ -34,6 +33,10 @@
     category: 'Women',
     sales: 25
   };
+
+  if(props.product){
+      product = props.product
+  }
 
 </script>
 

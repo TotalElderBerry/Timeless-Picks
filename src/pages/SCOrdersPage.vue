@@ -22,18 +22,38 @@
       </div>
       <div class="row justify-center q-mt-sm">
         
-        <SCOrderItems class="col-12" v-if="tab === 'to_confirm'"/>
-        <SCOrderItems class="col-12" v-if="tab === 'to_confirm'"/>
-        <SCOrderItemWithHistory class="col-12" v-if="showItemWithHistory"/>
+        <SCOrderItems v-for="pr in products" :order="pr" class="col-12" v-if="tab === 'to_confirm' || tab === 'rejected'"/>
+        <SCOrderItemWithHistory v-for="pr in products" :order="pr" class="col-12" v-if="showItemWithHistory"/>
       </div>
     </div>
   </template>
 
 <script setup>
-import {ref, computed} from 'vue'
+import {ref, computed,watch} from 'vue'
 import SCOrderItems from 'src/components/SCOrderItems.vue';
 import SCOrderItemWithHistory from 'src/components/SCOrderItemWithHistory.vue';
+import {useOrderStore} from 'src/stores/orders.js'
+const orders = useOrderStore()
 const tab = ref('to_confirm')
+let products = orders.products.filter(p => p.status === 'pending')
+watch(() => tab.value, () => {
+  switch (tab.value) {
+    case 'to_confirm':
+      products = orders.products.filter(p => p.status === 'pending')
+      break;
+    case 'to_receive':
+      products = orders.products.filter(p => p.status === 'to be delivered')
+      break;
+    case 'completed':
+      products = orders.products.filter(p => p.status === 'completed')
+      break;
+    case 'rejected':
+      products = orders.products.filter(p => p.status === 'rejected')
+      break;
+    default:
+      break;
+  }
+})
 
 const showItemWithHistory = computed(() => {
   switch (tab.value) {

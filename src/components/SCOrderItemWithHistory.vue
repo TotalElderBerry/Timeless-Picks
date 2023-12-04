@@ -6,12 +6,13 @@
             <q-card-section class="col-xs-4 col-sm-3 col-md-2 flex flex-center">
                 <q-img
                 class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                :src="props.order.img[0]"
+                style="max-width: 150px; max-height: 150px;"
                 />
             </q-card-section>
 
             <q-card-section class="q-pt-xs col">
-                <div class="text-h6 q-mt-sm q-mb-xs">Women's Dress</div>
+                <div class="text-h6 q-mt-sm q-mb-xs">{{props.order.name}}</div>
                 <div class="text-caption text-grey">
                     Ordered by - Brian Keith Lisondra ( @brianzl1 )
                 </div>
@@ -24,7 +25,7 @@
         <q-card-section class="inline row q-gutter-sm items-center">
             <q-icon name="o_delivery_dining" size="sm" color="green"/>
             <div class="text-caption text-green">
-                In guangzhou sorting facility
+                {{historyMsg}}
             </div>
         </q-card-section>
   
@@ -34,7 +35,12 @@
   </template>
 
 <script setup>
-    import { ref } from "vue";
+    import { ref, computed } from "vue";
     const options = ref(['CONFIRM', 'REJECT'])
+    const props = defineProps(['order'])
+    console.log(props.order)
+    const historyMsg = computed(() => {
+        return (props.order.status === 'completed')?'COMPLETED':'In Guangzhou Sorting Facility'
+    })
     const model = ref('Action')
 </script>

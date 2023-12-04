@@ -31,15 +31,9 @@
 
     </div>
     <q-separator class="q-my-lg" />
-    <div v-if="isSearchClicked">
+    <div>
       <div class="row" :class="{ 'q-gutter-xs justify-center': $q.screen.lt.sm, 'q-gutter-md justify-start': $q.screen.gt.xs }">
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
+        <ProductItem v-for="pr in products.products" :product="pr" class="" style="cursor: pointer"/>
       </div>
     </div>
   </div>
@@ -50,6 +44,8 @@
 <script setup>
 import { ref } from 'vue'
 import ProductItem from 'src/components/ProductItem.vue'
+import {useProductStore} from 'src/stores/products.js'
+const products = useProductStore()
 const model = ref("Name")
 const isSearchClicked = ref(false)
 const options = ["Name", 'ID']
