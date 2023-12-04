@@ -58,7 +58,7 @@
 import {ref} from 'vue'
 import {useProductStore} from 'src/stores/products.js'
 import {useRoute,useRouter} from 'vue-router'
-
+import {Loading, Notify} from 'quasar'
 const router = useRouter()
 const route = useRoute()
 const products = useProductStore()
@@ -80,14 +80,21 @@ const submit = () => {
 	// 	img: [imgModel], 
 	// 	...newItem,
 	// };
-
-	const newOrder = newItem.value
-	newOrder.id = products.products.length + 1
-	newOrder.img = [imgModel.value]
-	console.log(newOrder)
-
-	products.products.push(newOrder);
-	console.log(products.products)
-	router.push({name: 'my-products'})
+	if(newItem.value.name === '' || newItem.value.category === '' || newItem.value.stock === '' || newItem.value.price === '' || imgModel.value === '' ){
+			Notify.create({message: 'Please fill the important fields', color:'red'})
+	}else{
+		Loading.show({message: 'Please Wait while we are working with it'})
+		setTimeout(() => {
+          Loading.hide()
+			const newOrder = newItem.value
+			newOrder.id = products.products.length + 1
+			newOrder.img = [imgModel.value]
+			console.log(newOrder)
+		
+			products.products.push(newOrder);
+			Notify.create({message: 'Added a product', color:'green'})
+			router.push({name: 'my-products'})
+        }, 1000)
+	}
 }
 </script>
