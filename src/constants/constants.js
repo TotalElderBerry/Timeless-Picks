@@ -126,7 +126,7 @@ export const categoryProducts = [
       {
         name: 'tops',
         images: [
-          { id: 'shortdresses',label: 'T-shirts', img: topsmen1 },
+          { id: 'tshirts',label: 'T-shirts', img: topsmen1 },
           { id: 'shortdresses',label: 'Polo Shirts', img: topsmen2 },
           { id: 'shortdresses',label: 'Tank Tops', img: topsmen3 }
         ]

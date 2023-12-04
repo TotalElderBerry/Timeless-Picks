@@ -38,7 +38,6 @@
     import { ref, computed } from "vue";
     const options = ref(['CONFIRM', 'REJECT'])
     const props = defineProps(['order'])
-    console.log(props.order)
     const historyMsg = computed(() => {
         return (props.order.status === 'completed')?'COMPLETED':'In Guangzhou Sorting Facility'
     })

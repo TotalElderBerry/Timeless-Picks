@@ -1,5 +1,5 @@
 <template>
-  <q-card class="q-my-xs">
+  <q-card class="q-my-xs" style="min-width: 150px">
     <div class="row justify-center q-pt-sm">
       <q-img
         :src="product.img"

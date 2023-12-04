@@ -98,6 +98,8 @@
 <script setup>
 import {useRoute,useRouter} from 'vue-router'
 import {useProductStore} from 'src/stores/products.js'
+import {useOrderStore} from 'src/stores/orders.js'
+const orders = useOrderStore()
 const products = useProductStore()
 const router = useRouter()
 const route = useRoute()
@@ -110,6 +112,13 @@ const getProduct = () => {
 const currentProduct = getProduct()
 
 const routeToCheckoutSuccess = () => {
+    const newOrder = {
+        status: 'pending',
+    ...products.products[route.params.id - 1],
+    };
+    newOrder.id = orders.products.length + 1,
+     
+    orders.products.push(newOrder)
     router.push('success')
 }
 </script>

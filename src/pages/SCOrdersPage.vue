@@ -35,24 +35,29 @@ import SCOrderItemWithHistory from 'src/components/SCOrderItemWithHistory.vue';
 import {useOrderStore} from 'src/stores/orders.js'
 const orders = useOrderStore()
 const tab = ref('to_confirm')
-let products = orders.products.filter(p => p.status === 'pending')
+const products = ref(orders.products.filter(p => p.status === 'pending'))
+
 watch(() => tab.value, () => {
   switch (tab.value) {
     case 'to_confirm':
-      products = orders.products.filter(p => p.status === 'pending')
+      products.value = orders.products.filter(p => p.status === 'pending')
       break;
     case 'to_receive':
-      products = orders.products.filter(p => p.status === 'to be delivered')
+      products.value = orders.products.filter(p => p.status === 'to be delivered')
       break;
     case 'completed':
-      products = orders.products.filter(p => p.status === 'completed')
+      products.value = orders.products.filter(p => p.status === 'completed')
       break;
     case 'rejected':
-      products = orders.products.filter(p => p.status === 'rejected')
+      products.value = orders.products.filter(p => p.status === 'rejected')
       break;
     default:
       break;
   }
+})
+
+watch(orders.products, () => {
+  products.value = orders.products.filter(p => p.status === 'pending')
 })
 
 const showItemWithHistory = computed(() => {

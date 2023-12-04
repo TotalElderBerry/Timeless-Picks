@@ -82,8 +82,8 @@
             Other Products
         </div>
          <div class="row justify-center q-gutter-xs">
-                <ProductItem v-for="pr in otherProducts" :product="pr" :inProducts="true" class="" @click="routeToProductPage" style="cursor: pointer"/>
-            </div>
+            <ProductItem v-for="pr in otherProducts.value" :product="pr" :inProducts="true" class="" @click="() => routeToProductPage(pr.id)" style="cursor: pointer"/>
+        </div>
     </div>
 
     </div>
@@ -95,7 +95,7 @@
 </template>
 
 <script setup>
-import {ref,computed} from 'vue'
+import {ref,computed, watch, onMounted} from 'vue'
 import {useRoute,useRouter} from 'vue-router'
 import ProductItem from 'src/components/ProductItem.vue';
 import {useProductStore} from 'src/stores/products.js'
@@ -103,18 +103,40 @@ const products = useProductStore()
 const router = useRouter()
 const route = useRoute()
 const slide = ref(0)
+const currentProduct = ref()
+const otherProducts = ref()
+watch(() => route.params.id,() => {
+    otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
+    currentProduct.value = getProduct()
+    console.log(otherProducts.value)
+})
 
-const otherProducts = computed(() => products.products.filter(pr => pr.id != route.params.id))
 const getProduct = () => {
     if(route.params.id > -1 && route.params.id <= products.products.length){
         return products.products[route.params.id - 1]
     }
 }
+otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
 
-const currentProduct = getProduct()
-console.log(currentProduct.img)
+currentProduct.value = getProduct()
+// onMounted(() => {
+//     console.log("hi")
+
+//     otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
+//     const getProduct = () => {
+//         if(route.params.id > -1 && route.params.id <= products.products.length){
+//             return products.products[route.params.id - 1]
+//         }
+//     }
+
+//     currentProduct.value = getProduct()
+// })
+
 const routeToCheckout = () => {
-    router.push({name: 'checkout', params: {id: 1}})
+    router.push({name: 'checkout', params: {id: route.params.id}})
 }
 
+const routeToProductPage = (id) => {
+    router.push({name: 'product', params: {id: id}})
+}
 </script>
