@@ -12,10 +12,10 @@
             padding
             arrows
             height="350px"
-            class="bg-green-4 text-white shadow-1 rounded-borders col-md-4 col-sm-12"
+            class="bg-green-4 text-white shadow-1 rounded-borders col-md-5 col-sm-12"
         >
         <q-carousel-slide v-for="img,key in currentProduct.img" :name="key" class="column no-wrap flex-center">
-            <div style="width: 100%;">
+            <div style="max-width: 300px;">
                 <img
                 :src="img"
                 style="width: 100%; height: auto; object-fit: contain; min-width: 210px; min-height: 150px;"
