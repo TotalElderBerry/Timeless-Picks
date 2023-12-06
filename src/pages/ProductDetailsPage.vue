@@ -67,7 +67,7 @@
 
         <q-card-section class="gt-sm inline row items-center q-gutter-sm">
             <div class="row q-gutter-xs">
-            <q-btn label="Chat" class=" text-caption bg-secondary text-white" style="font-size: 10px"/>
+            <q-btn label="Chat" @click="routeToChat" class=" text-caption bg-secondary text-white" style="font-size: 10px"/>
             <q-btn outlined label="Add to Cart" icon="shopping_cart" class=" text-caption bg-secondary text-white" style="font-size: 10px"/>
             </div>
             <q-btn @click="routeToCheckout" label="Buy Now" class="col bg-primary text-white"/>
@@ -88,7 +88,7 @@
 
     </div>
     <div class="absolute-bottom fixed-bottom bg-white row lt-md inline" style="position:sticky; width: 100%">
-      <q-btn label="Chat" class="col-3 text-caption bg-secondary text-white"/>
+      <q-btn label="Chat" @click="routeToChat" class="col-3 text-caption bg-secondary text-white"/>
       <q-btn label="Add to Cart" class="col-3 text-caption bg-secondary text-white" style="font-size: 10px"/>
       <q-btn @click="routeToCheckout" label="Buy Now" icon="update" class="col bg-primary text-white"/>
     </div>
@@ -109,13 +109,16 @@ const stars = ref(4.2)
 watch(() => route.params.id,() => {
     otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
     currentProduct.value = getProduct()
-    console.log(otherProducts.value)
 })
 
 const getProduct = () => {
     if(route.params.id > -1 && route.params.id <= products.products.length){
         return products.products[route.params.id - 1]
     }
+}
+
+const routeToChat = () => {
+    router.push({name: 'chat-customer', params: {id: route.params.id}})
 }
 otherProducts.value = computed(() => products.products.filter(pr => pr.id != route.params.id))
 

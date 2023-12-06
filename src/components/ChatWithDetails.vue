@@ -5,7 +5,7 @@
         <q-btn @click="handleClick" class="back-button" icon="arrow_back" flat round />
         <ChatProductDetails :detail="props.product"/>
       </div>
-      <ChatArea :chat="chat"/>
+      <ChatArea :chat="productchats.texts" @sendMessage="sendMessage"/>
     </div>
 
     <div class="fixed-input-container">
@@ -30,19 +30,45 @@
 <script setup>
     import ChatProductDetails from "src/components/ChatProductDetails.vue";
     import ChatArea from "src/components/ChatArea.vue";
-    import {useRouter} from 'vue-router'
+    import {useRoute,useRouter} from 'vue-router'
     import {watch,ref} from 'vue'
+    import {useChatStore} from 'src/stores/chats.js'
+    const chatsstore = useChatStore()
+    const route = useRoute()
+    const productchats = ref()
+    productchats.value = chatsstore.chats.filter(chat => chat.product_id == route.params.id)[0]
+    if(!productchats.value){
+      const tempProduct = {
+            product_id: parseInt(route.params.id),
+            texts: [
+                
+            ]
+      }
+      productchats.value = tempProduct
+      chatsstore.chats.push(productchats.value)
+    }
     const router = useRouter()
     const props = defineProps(['product']);
     const chat = ref('')
     const newMessage = ref('')
+
     const handleClick = () => {
+      console.log(route.name)
+      if(route.name === 'chat-customer'){
+        router.replace({name: 'product', params: {id: parseInt(route.params.id)}})
+      }else{
         router.replace({name: 'chats'})
+      }
     }
     
 
-    const sendMessage = () => {
-        chat.value = newMessage.value
+    const sendMessage = (msg) => {
+        const newMessage = {
+          product_id: parseInt(route.params.id),
+          text: msg,
+          sent: (route.name === 'chat-customer')?false:true,
+        }
+        chatsstore.sendMessage(newMessage)
         newMessage.value = ''
     }
 </script>

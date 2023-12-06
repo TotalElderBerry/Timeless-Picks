@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
-const props = defineProps(['detail'])
+const props = defineProps(['detail','preview'])
 const message = {
-    preview: 'Hello, how are you?',
+    preview: props.preview,
     timestamp: 1672537200000, // Timestamp in milliseconds
 }
 </script>

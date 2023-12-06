@@ -3,7 +3,7 @@
     <img :src="props.detail.img" alt="User Profile" class="profile-picture bg-white" />
     <div class="message-content">
       <div class="user-info">
-        <div class="user-name ">{{props.detail.name}} - <span class="text-grey-9 text-bold">{{props.detail.product}}</span></div>
+        <div class="user-name text-light">{{props.detail.name}} </div>
       </div>
     </div>
   </div>
