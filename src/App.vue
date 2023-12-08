@@ -4,12 +4,15 @@
 </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { useMeta } from 'quasar'
 
-export default defineComponent({
-  name: 'App'
+useMeta( () => {
+  return {
+    title: 'Timeless Picks'
+  }
 })
+
 </script>
 
 <style scoped>
