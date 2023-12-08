@@ -39,7 +39,17 @@
     const options = ref(['CONFIRM', 'REJECT'])
     const props = defineProps(['order'])
     const historyMsg = computed(() => {
-        return (props.order.status === 'completed')?'COMPLETED':'In Guangzhou Sorting Facility'
+        switch(props.order.status ){
+            case 'completed':
+                return 'COMPLETED'
+            case 'pending':
+                return 'To be confirm by the seller'
+            case 'to be delivered':
+                return 'In Guangzhou Sorting Facility'
+            case 'rejected':
+                return 'REJECTED'
+        }
+        // return (props.order.status === 'completed')?'COMPLETED':'In Guangzhou Sorting Facility'
     })
     const model = ref('Action')
 </script>

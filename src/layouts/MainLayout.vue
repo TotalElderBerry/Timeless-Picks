@@ -31,7 +31,7 @@
           <q-toolbar-title v-if="$q.screen.gt.sm">
           </q-toolbar-title>
         <q-btn flat round dense icon="notifications" color="primary" />
-        <q-btn flat round dense icon="account_circle" color="primary" />
+        <q-btn flat round dense icon="account_circle" color="primary" @click="routeToProfile"/>
       </q-toolbar>
     </q-header>
 
@@ -64,7 +64,15 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import {useRoute, useRouter} from 'vue-router'
+
 const leftDrawerOpen = ref(false)
+
+    const router = useRouter()
+const routeToProfile = () => {
+    console.log(router)
+  router.push({name: 'profile'})
+}
 
 const linksList = [
   {

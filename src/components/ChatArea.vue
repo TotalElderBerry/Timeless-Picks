@@ -8,10 +8,10 @@
         </div>
       </div>
     </div>
-    <div class="col-12 row bg-white">
+    <!-- <div class="col-12 row bg-white">
       <q-input v-model="newMessage" class="col-11 q-px-md" placeholder="Type your message..." dense />
       <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
-    </div>
+    </div> -->
   </div>
   </div>
 </template>

@@ -5,14 +5,14 @@
         <q-btn @click="handleClick" class="back-button" icon="arrow_back" flat round />
         <ChatProductDetails :detail="props.product"/>
       </div>
-      <ChatArea :chat="productchats.texts" @sendMessage="sendMessage"/>
+      <ChatArea :chat="productchats.texts" />
     </div>
 
     <div class="fixed-input-container">
-      <!-- <div class="row col-12 items-center" style="flex-shrink: 0;">
-        <q-input v-model="newMessage" class="col-11 q-px-md" placeholder="Type your message..." dense />
+      <div class="row col-12 items-center" style="flex-shrink: 0;">
+        <q-input v-model="newMessageModel" class="col-11 q-px-md" placeholder="Type your message..." dense />
         <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@
     const chatsstore = useChatStore()
     const route = useRoute()
     const productchats = ref()
+    const newMessageModel = ref('')
     productchats.value = chatsstore.chats.filter(chat => chat.product_id == route.params.id)[0]
     if(!productchats.value){
       const tempProduct = {
@@ -62,13 +63,14 @@
     }
     
 
-    const sendMessage = (msg) => {
+    const sendMessage = () => {
         const newMessage = {
           product_id: parseInt(route.params.id),
-          text: msg,
+          text: newMessageModel.value,
           sent: (route.name === 'chat-customer')?false:true,
         }
+        console.log(newMessage)
         chatsstore.sendMessage(newMessage)
-        newMessage.value = ''
+        newMessageModel.value = ''
     }
 </script>

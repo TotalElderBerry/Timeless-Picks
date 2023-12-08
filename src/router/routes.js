@@ -11,6 +11,7 @@ const PageFilePaths = {
   PRODUCT_DETAILS: import('pages/ProductDetailsPage.vue'),
   CHECKOUT: import('pages/CheckoutPage.vue'),
   CHECKOUT_MESSAGE: import('pages/SuccessfulCheckoutPage.vue'),
+  PROFILE: import('pages/ProfilePage.vue'),
 };
 
 const routes = [
@@ -22,6 +23,7 @@ const routes = [
       { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER },
       { path: 'category/:type', name: 'category' , component: () => PageFilePaths.CATEGORY_PRODUCTS },
       { path: 'chat/:id', name: 'chat-customer',component: () => PageFilePaths.SELLER_CENTER_CHAT_W_DETAILS },
+      { path: 'profile', name: 'profile',component: () => PageFilePaths.PROFILE },
     ]
   },
   {

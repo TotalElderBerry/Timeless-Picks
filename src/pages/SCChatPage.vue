@@ -14,6 +14,12 @@
                 <div class="gt-xs inline">
                     <ChatArea v-if="!isLoading" :chat="selectedItemChat" @sendMessage="sendMessage"/>
                 </div>
+                <div class="fixed-input-container">
+                <div class="row col-12 items-center" style="flex-shrink: 0;">
+                    <q-input v-model="newMessageModel" class="col-11 q-px-md" placeholder="Type your message..." dense />
+                    <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -31,7 +37,7 @@ import {useChatStore} from 'src/stores/chats.js'
 const chatsstore = useChatStore()
 import {useProductStore} from 'src/stores/products.js'
 const productsstore = useProductStore()
-
+const newMessageModel = ref('')
 const isChatOpen = ref(false)
 const selectedItem = ref(chatTile[0])
 const selectedItemChat = ref([])
@@ -69,14 +75,14 @@ const handleClick = (isXs,detail) => {
     isLoading.value = false
 }
 
-const sendMessage = (msg) => {
+const sendMessage = () => {
     const newMessage = {
         product_id: selectedItem.value.id,
-        text: msg,
+        text: newMessageModel.value,
         sent: true,
     }
     chatsstore.sendMessage(newMessage)
-    newMessage.value = ''
+    newMessageModel.value = ''
 }
 
 </script>
