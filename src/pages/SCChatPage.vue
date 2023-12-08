@@ -12,12 +12,12 @@
                     <ChatProductDetails :detail="selectedItem"/>
                 </div>
                 <div class="gt-xs inline">
-                    <ChatArea v-if="!isLoading" :chat="selectedItemChat" @sendMessage="sendMessage"/>
+                    <ChatArea v-if="!isLoading" :item="selectedItem" :chat="selectedItemChat" @sendMessage="sendMessage"/>
                 </div>
                 <div class="fixed-input-container">
-                <div class="row col-12 items-center" style="flex-shrink: 0;">
+                <div class="row  col-12 items-center " style="flex-shrink: 0;">
                     <q-input v-model="newMessageModel" class="col-11 q-px-md" placeholder="Type your message..." dense />
-                    <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
+                    <q-btn @click="sendMessage" class="col gt-xs inline" color="primary" icon="send" flat round />
                 </div>
                 </div>
             </div>
@@ -53,7 +53,6 @@ onMounted(() => {
         });
         return hasChat;
     })
-
     selectedItem.value = productchats.value[0]
     selectedItemChat.value = chatsstore.chats.filter(chat => chat.product_id == selectedItem.value.id)[0].texts
     isLoading.value = false

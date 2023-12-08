@@ -4,14 +4,23 @@
     <div class="q-pa-md" style="flex: 3; overflow-y: auto;">
       <div>
         <div v-for="(message, index) in messages" :key="index">
-          <q-chat-message :text="[message.text]" :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          <div v-if="message.makeOffer">
+            <q-chat-message :text="['<strong>MADE AN OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          </div>
+          <div v-if="message.acceptOffer">
+            <q-chat-message :text="['<strong>ACCEPTED THE OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          </div>
+          <div v-if="message.makeOffer && route.name !== 'chat-customer'" class="q-my-sm">
+              <q-btn @click="() => handleOffer(message.text)" outline class="q-mx-sm" style="min-width: 70px;" padding="xs" fab label="ACCEPT" color="accent" />
+              <q-btn outline class="q-mx-sm" style="min-width: 70px;" padding="xs" fab label="DECLINE" color="accent" />
+          </div>
+          <!-- <div v-if="message.acceptOffer && route.name !== 'chat-customer'" class="q-my-sm">
+              <q-chat-message :text="['<strong>ACCEPTED THE OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          </div> -->
+          <q-chat-message v-if="!message.makeOffer && !message.acceptOffer" :text="[message.text]" :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
         </div>
       </div>
     </div>
-    <!-- <div class="col-12 row bg-white">
-      <q-input v-model="newMessage" class="col-11 q-px-md" placeholder="Type your message..." dense />
-      <q-btn @click="sendMessage" class="col" color="primary" icon="send" flat round />
-    </div> -->
   </div>
   </div>
 </template>
@@ -19,12 +28,15 @@
 <script setup>
 import { ref,watch } from 'vue';
 import {useRoute} from 'vue-router'
-const props = defineProps(['chat'])
+const props = defineProps(['chat','item'])
 const emits = defineEmits(['sendMessage'])
 const route = useRoute()
+import {useChatStore} from 'src/stores/chats.js'
+const chatsstore = useChatStore()
 watch(() => props.chat, ()=> {
   messages.value = props.chat
 })
+
 
 const messages = ref();
 if(props){
@@ -37,12 +49,24 @@ if(props){
 
 const newMessage = ref('');
 
-const sendMessage = () => {
-  if (newMessage.value.trim() !== '') {
-    emits('sendMessage',newMessage.value)
-    newMessage.value = '';
+// const sendMessage = () => {
+//   if (newMessage.value.trim() !== '') {
+//     emits('sendMessage',newMessage.value)
+//     newMessage.value = '';
+//   }
+// };
+
+const handleOffer = (val) => {
+  console.log(props.item)
+  const newMessage = {
+    product_id: (props.item)?props.item.id:parseInt(route.params.id),
+    text: val,
+    sent: (route.name === 'chat-customer')?false:true,
   }
-};
+  console.log(newMessage)
+    newMessage.acceptOffer = true;
+    chatsstore.sendMessage(newMessage)
+}
 </script>
 
 <style scoped>
