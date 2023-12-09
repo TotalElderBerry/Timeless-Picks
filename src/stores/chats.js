@@ -23,7 +23,7 @@ export const useChatStore = defineStore('chats', {
       const chat = this.chats.find((chat) => chat.product_id === product_id);
       // If the chat is found, push the new message to the texts array
       if (chat) {
-        if(acceptOffer){
+        if(acceptOffer !== undefined){
           chat.texts.push({ text, sent, acceptOffer });
         }
         else if(makeOffer){

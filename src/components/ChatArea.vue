@@ -7,17 +7,17 @@
           <div v-if="message.makeOffer">
             <q-chat-message :text="['<strong>MADE AN OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
           </div>
-          <div v-if="message.acceptOffer">
-            <q-chat-message :text="['<strong>ACCEPTED THE OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          <div v-if="message.acceptOffer !== undefined">
+            <q-chat-message :text="[(message.acceptOffer === true)?'<strong>ACCEPTED THE OFFER</strong>':'<strong>DECLINE THE OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
           </div>
           <div v-if="message.makeOffer && route.name !== 'chat-customer'" class="q-my-sm">
               <q-btn @click="() => handleOffer(message.text)" outline class="q-mx-sm" style="min-width: 70px;" padding="xs" fab label="ACCEPT" color="accent" />
-              <q-btn outline class="q-mx-sm" style="min-width: 70px;" padding="xs" fab label="DECLINE" color="accent" />
+              <q-btn @click="() => declineOffer(message.text)" outline class="q-mx-sm" style="min-width: 70px;" padding="xs" fab label="DECLINE" color="accent" />
           </div>
           <!-- <div v-if="message.acceptOffer && route.name !== 'chat-customer'" class="q-my-sm">
               <q-chat-message :text="['<strong>ACCEPTED THE OFFER</strong>',message.text]" text-html :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
           </div> -->
-          <q-chat-message v-if="!message.makeOffer && !message.acceptOffer" :text="[message.text]" :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
+          <q-chat-message v-if="!message.makeOffer && message.acceptOffer === undefined" :text="[message.text]" :sent="(route.name === 'chat-customer')?!message.sent:message.sent" :bg-color="(route.name === 'chat-customer' || route.name === 'chat-mobile')?(!message.sent ? 'amber-4' : 'green-3'):(message.sent ? 'amber-4' : 'green-3')" />
         </div>
       </div>
     </div>
@@ -57,14 +57,22 @@ const newMessage = ref('');
 // };
 
 const handleOffer = (val) => {
-  console.log(props.item)
   const newMessage = {
     product_id: (props.item)?props.item.id:parseInt(route.params.id),
     text: val,
     sent: (route.name === 'chat-customer')?false:true,
   }
-  console.log(newMessage)
     newMessage.acceptOffer = true;
+    chatsstore.sendMessage(newMessage)
+}
+
+const declineOffer = (val) => {
+  const newMessage = {
+    product_id: (props.item)?props.item.id:parseInt(route.params.id),
+    text: val,
+    sent: (route.name === 'chat-customer')?false:true,
+  }
+    newMessage.acceptOffer = false;
     chatsstore.sendMessage(newMessage)
 }
 </script>
