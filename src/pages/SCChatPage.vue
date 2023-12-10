@@ -11,7 +11,7 @@
                 <div class="gt-xs inline col bg-white q-ma-md">
                     <ChatProductDetails :detail="selectedItem"/>
                 </div>
-                <div class="gt-xs inline">
+                <div class="gt-xs inline q-pb-xl">
                     <ChatArea v-if="!isLoading" :item="selectedItem" :chat="selectedItemChat" @sendMessage="sendMessage"/>
                 </div>
                 <div class="fixed-input-container">
@@ -86,6 +86,12 @@ const sendMessage = () => {
 
 </script>
 
-
 <style scoped>
+.fixed-input-container {
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+  background-color: #fff; /* You can adjust the background color as needed */
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for better visibility */
+}
 </style>
