@@ -17,6 +17,9 @@ const message = {
     preview: props.preview,
     timestamp: 1672537200000, // Timestamp in milliseconds
 }
+
+console.log(props.detail)
+
 </script>
 
 <style scoped>

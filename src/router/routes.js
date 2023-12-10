@@ -20,7 +20,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name:'home', component: () => PageFilePaths.HOME },
-      { path: 'sellercenter', component: () => PageFilePaths.SELLER_CENTER },
+      { path: 'sellercenter', name: 'sc-login', component: () => PageFilePaths.SELLER_CENTER },
       { path: 'category/:type', name: 'category' , component: () => PageFilePaths.CATEGORY_PRODUCTS },
       { path: 'chat/:id', name: 'chat-customer',component: () => PageFilePaths.SELLER_CENTER_CHAT_W_DETAILS },
       { path: 'profile', name: 'profile',component: () => PageFilePaths.PROFILE },

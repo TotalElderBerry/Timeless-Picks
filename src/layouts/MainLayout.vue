@@ -56,19 +56,56 @@
 
     <q-page-container>
       <router-view />
+       <q-page-sticky class="" position="bottom-right" :offset="[18, 0]" v-if="route.name !== 'chat-customer' && route.name !== 'sc-login'">
+        <div class="bg-white q-pa-sm" v-if="toShowChats" style="max-height:200px; overflow-y:scroll">
+          <div class="row items-center q-pr-sm">
+            <div class="q-pl-sm col-11 text-weight-bold">Chats</div>
+            <q-icon name="close" @click="() => toShowChats = false " class="col"/>
+          </div>
+          <ChatTile v-for="detail,key in productchats" :detail="detail" @click="() => handleClick($q.screen.lt.sm,{key,...detail})" :preview="getPreviewMsg(detail.id)"/>
+        </div>
+          <q-btn color="accent" v-if="!toShowChats" @click="() => toShowChats = true" label="CHAT" class="" size="lg"/>
+        </q-page-sticky>
     </q-page-container>
   </q-layout>
 </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import {useRoute, useRouter} from 'vue-router'
-
+import {useChatStore} from 'src/stores/chats.js'
+const chatsstore = useChatStore()
+import {useProductStore} from 'src/stores/products.js'
+const productsstore = useProductStore()
 const leftDrawerOpen = ref(false)
+const productchats = ref([]);
+import ChatTile from "src/components/ChatTile.vue"
+const toShowChats = ref(false)
+const router = useRouter()
+const route = useRoute()
 
-    const router = useRouter()
+onMounted(() => {
+    productchats.value = productsstore.products.filter(product => {
+        const hasChat = chatsstore.chats.some(chat => {
+            return product.id === chat.product_id;
+        });
+        return hasChat;
+    })
+    console.log(productchats.value)
+})
+
+const getPreviewMsg=(id)=>{
+    const temp = chatsstore.chats.filter(chat => chat.product_id == id)[0].texts
+    return (temp)?temp[temp.length-1].text:'Start Chatting'
+}
+
+
+const handleClick = (isXs,detail) => {
+    router.push({name: 'chat-customer', params: {id: detail.id}})
+}
+
 const routeToProfile = () => {
     console.log(router)
   router.push({name: 'profile'})
