@@ -57,12 +57,14 @@
     <q-page-container>
       <router-view />
        <q-page-sticky class="" position="bottom-right" :offset="[18, 0]" v-if="route.name !== 'chat-customer' && route.name !== 'sc-login'">
-        <div class="bg-white q-pa-sm" v-if="toShowChats" style="max-height:200px; overflow-y:scroll">
-          <div class="row items-center q-pr-sm">
+        <div class="bg-white" v-if="toShowChats" style="max-height:200px; overflow-y:scroll">
+          <div class="row items-center text-white q-pa-sm bg-primary">
             <div class="q-pl-sm col-11 text-weight-bold">Chats</div>
             <q-icon name="close" @click="() => toShowChats = false " class="col"/>
           </div>
+          <div class="q-px-sm">
           <ChatTile v-for="detail,key in productchats" :detail="detail" @click="() => handleClick($q.screen.lt.sm,{key,...detail})" :preview="getPreviewMsg(detail.id)"/>
+          </div>
         </div>
           <q-btn color="accent" v-if="!toShowChats" @click="() => toShowChats = true" label="CHAT" class="" size="lg"/>
         </q-page-sticky>
