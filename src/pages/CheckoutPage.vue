@@ -105,6 +105,7 @@
 </div>
 
 <q-dialog v-model="isModalOpen" v-if="!isLoading" >
+    <div v-if="paymentOption.option === 'Paymaya'">
       <q-card class="row">
         <q-card-section class="">
           <div class="text-h6">You will be directed to a new tab</div>
@@ -114,16 +115,23 @@
             Continue
         </a>
       </q-card>
+    </div>
+    <div v-if="paymentOption.option === 'Paypal'" class="bg-white q-pa-lg">
+        <q-card-section class="">
+          <div class="text-h6">Payment Thru Paypal</div>
+        </q-card-section>
+        <div id="paypal-button-container"></div>
+    </div>
     </q-dialog>
 </template>
-
 <script setup>
 import {useRoute,useRouter} from 'vue-router'
 import {useProductStore} from 'src/stores/products.js'
 import {useOrderStore} from 'src/stores/orders.js'
 import {usePaymentOptionStore} from 'src/stores/paymentOption.js'
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import {Loading} from 'quasar'
+import {loadScript} from '@paypal/paypal-js';
 
 const paymentOption = usePaymentOptionStore()
 const orders = useOrderStore()
@@ -140,8 +148,12 @@ const getProduct = () => {
 }
 const currentProduct = getProduct()
 
+onMounted(async() => {
+    
+});
+
+
 const routeToCheckoutSuccess = async () => {
-    console.log(process.env.VERCEL_URL)
     const newOrder = {
         status: 'pending',
     ...products.products[route.params.id - 1],
@@ -159,9 +171,50 @@ const routeToCheckoutSuccess = async () => {
                 
             }
         }, 300);
-    }else{
+    }else if(paymentOption.option !== 'Paypal'){
         orders.products.push(newOrder)
         router.push('success')
+    }else{
+        isModalOpen.value = true
+        try {
+        const paypal = await loadScript({
+            'client-id': 'test'
+        });
+
+        await paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            // e.g reference.price
+                            value: 12,
+                        },
+                    }],
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture!
+                    // e.g. Inertia.post(route('order.update', reference.orderId)
+                    router.push('success')
+                });
+            },
+            style: {
+                // Adapt to your needs
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal',
+            },
+            // The following is optional and you can
+            // limit the buttons to those you want to
+            // provide
+            fundingSource: paypal.FUNDING.PAYPAL,
+        }).render('#paypal-button-container');
+    } catch (error) {
+        // Add proper error handling
+        console.error(error);
+    }
     }
 }
 

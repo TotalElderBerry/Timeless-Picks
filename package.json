@@ -12,6 +12,7 @@
     "deploy": "vercel"
   },
   "dependencies": {
+    "@paypal/paypal-js": "^7.1.1",
     "@quasar/extras": "^1.16.4",
     "dotenv": "^16.3.1",
     "pinia": "^2.1.7",
