@@ -141,6 +141,7 @@ const getProduct = () => {
 const currentProduct = getProduct()
 
 const routeToCheckoutSuccess = async () => {
+    console.log(process.env.VERCEL_URL)
     const newOrder = {
         status: 'pending',
     ...products.products[route.params.id - 1],
