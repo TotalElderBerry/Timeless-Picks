@@ -212,6 +212,7 @@ const handleConfirm = async () => {
                 return data
             })
             .catch(error => {
+                console.log(process.env.VERCEL_URL)
                 console.error('There was a problem with the fetch operation:', error);
             });
 }
