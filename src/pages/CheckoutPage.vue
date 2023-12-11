@@ -185,8 +185,8 @@ const handleConfirm = async () => {
             const data = {
             totalAmount: { value: currentProduct.price, currency: 'PHP' },
             redirectUrl: {
-                success: `https://timeless-picks.vercel.app/products/checkout/success/`,
-                failure: `https://timeless-picks.vercel.app/products/checkout/success/`,
+                success: `https://timeless-picks.vercel.app/products/checkout/success`,
+                failure: `https://timeless-picks.vercel.app/products/checkout/success`,
             },
             requestReferenceNumber: 'as'
             };
