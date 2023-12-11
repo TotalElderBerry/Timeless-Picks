@@ -185,8 +185,8 @@ const handleConfirm = async () => {
             const data = {
             totalAmount: { value: currentProduct.price, currency: 'PHP' },
             redirectUrl: {
-                success: `${process.env.BASE_URL}/products/checkout/success/`,
-                failure: `${process.env.BASE_URL}/products/checkout/success/`,
+                success: `${process.env.VERCEL_URL}/products/checkout/success/`,
+                failure: `${process.env.VERCEL_URL}/products/checkout/success/`,
             },
             requestReferenceNumber: 'as'
             };
