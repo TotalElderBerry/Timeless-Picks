@@ -12,6 +12,8 @@ const PageFilePaths = {
   CHECKOUT: import('pages/CheckoutPage.vue'),
   CHECKOUT_MESSAGE: import('pages/SuccessfulCheckoutPage.vue'),
   PROFILE: import('pages/ProfilePage.vue'),
+  PAYMENT_OPTIONS: import('pages/PaymentOptionsPage.vue'),
+  DELIVERY_OPTIONS: import('pages/DeliveryOptionsPage.vue'),
 };
 
 const routes = [
@@ -24,6 +26,8 @@ const routes = [
       { path: 'category/:type', name: 'category' , component: () => PageFilePaths.CATEGORY_PRODUCTS },
       { path: 'chat/:id', name: 'chat-customer',component: () => PageFilePaths.SELLER_CENTER_CHAT_W_DETAILS },
       { path: 'profile', name: 'profile',component: () => PageFilePaths.PROFILE },
+      { path: 'payment-options', name: 'payment-options',component: () => PageFilePaths.PAYMENT_OPTIONS },
+      { path: 'delivery-options', name: 'delivery-options',component: () => PageFilePaths.DELIVERY_OPTIONS },
     ]
   },
   {

@@ -40,14 +40,19 @@
 
 
  <q-card flat bordered class="my-card bg-orange-1 q-mb-md">
-      <q-card-section class="q-px-md q-py-sm">
-        <div class="text-secondary">Shipping Option</div>
+      <q-card-section class="q-py-xs">
+         <q-item class="q-pa-xs">
+            <q-item-section class="text-primary text-weight-bold text-subtitle2">{{paymentOption.delivery}}</q-item-section>
+            <q-item-section side>
+                    <q-btn flat class="q-pa-xs" @click="routeToDeliveryOptions" icon="navigate_next" side />
+            </q-item-section>
+        </q-item>
       </q-card-section>
       <q-separator color="grey-4"/>
 
       <q-card-section class="q-pl-md">
         <div class="row justify-between">
-            <div class="">Standard Local</div>
+            <div class="">{{paymentOption.delivery}}</div>
             <div class="text-weight-bold">$10</div>
         </div>
         <div class="text-grey" style="font-size: 12px">Receive by Dec 25</div>
@@ -60,7 +65,12 @@
             <q-icon name="card_membership" color="orange" size="xs" />
             <div>Payment Option</div>
         </div>
-        <div class="text-primary text-weight-bold text-subtitle2">Cash On Delivery</div>
+        <q-item>
+            <q-item-section class="text-primary text-weight-bold text-subtitle2">{{paymentOption.option}}</q-item-section>
+            <q-item-section side>
+                    <q-btn flat class="q-pa-xs" @click="routeToPaymentOptions" icon="navigate_next" side />
+            </q-item-section>
+        </q-item>
     </q-card-section>
 </q-card>
 
@@ -93,17 +103,36 @@
     </div>
     <q-btn @click="routeToCheckoutSuccess" label="Place Order" class="col bg-primary text-white"/>
 </div>
+
+<q-dialog v-model="isModalOpen" v-if="!isLoading" >
+      <q-card class="row">
+        <q-card-section class="">
+          <div class="text-h6">You will be directed to a new tab</div>
+        </q-card-section>
+
+        <a :href="link" class="continue-link">
+            Continue
+        </a>
+      </q-card>
+    </q-dialog>
 </template>
 
 <script setup>
 import {useRoute,useRouter} from 'vue-router'
 import {useProductStore} from 'src/stores/products.js'
 import {useOrderStore} from 'src/stores/orders.js'
+import {usePaymentOptionStore} from 'src/stores/paymentOption.js'
+import {ref} from 'vue'
+import {Loading} from 'quasar'
+
+const paymentOption = usePaymentOptionStore()
 const orders = useOrderStore()
 const products = useProductStore()
 const router = useRouter()
 const route = useRoute()
-
+const link = ref('')
+const isModalOpen = ref(false)
+const isLoading = ref(false)
 const getProduct = () => {
     if(route.params.id > -1 && route.params.id <= products.products.length){
         return products.products[route.params.id - 1]
@@ -111,14 +140,96 @@ const getProduct = () => {
 }
 const currentProduct = getProduct()
 
-const routeToCheckoutSuccess = () => {
+const routeToCheckoutSuccess = async () => {
     const newOrder = {
         status: 'pending',
     ...products.products[route.params.id - 1],
     };
-    newOrder.id = orders.products.length + 1,
-     
-    orders.products.push(newOrder)
-    router.push('success')
+    newOrder.id = orders.products.length + 1
+    if(paymentOption.option === 'Paymaya'){
+        Loading.show({message: 'Please Wait'})
+        setTimeout(async() => {
+            try {
+                const data = await handleConfirm();
+                orders.products.push(newOrder)
+                Loading.hide()
+                console.log(data)
+            } catch (error) {
+                
+            }
+        }, 300);
+    }else{
+        orders.products.push(newOrder)
+        router.push('success')
+    }
+}
+
+const routeToPaymentOptions = () => {
+    router.push({name: 'payment-options'})
+}
+
+const routeToDeliveryOptions = () => {
+    router.push({name: 'delivery-options'})
+}
+
+const handleConfirm = async () => {
+    isLoading.value = true
+    const url = 'https://pg-sandbox.paymaya.com/checkout/v1/checkouts';
+            const headers = {
+                'accept': 'application/json',
+                'content-type': 'application/json',
+                'authorization': 'Basic cGstWjBPU3pMdkljT0kyVUl2RGhkVEdWVmZSU1NlaUdTdG5jZXF3VUU3bjBBaDpway1aME9Tekx2SWNPSTJVSXZEaGRUR1ZWZlJTU2VpR1N0bmNlcXdVRTduMEFo'
+            };
+
+            const data = {
+            totalAmount: { value: currentProduct.price, currency: 'PHP' },
+            redirectUrl: {
+                success: `${process.env.BASE_URL}/products/checkout/success/`,
+                failure: `${process.env.BASE_URL}/products/checkout/success/`,
+            },
+            requestReferenceNumber: 'as'
+            };
+
+            const options = {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(data)
+            };
+
+            fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // console.log(data);
+                // router.push(data.redirectUrl)
+                link.value = data.redirectUrl
+                isLoading.value = false
+                isModalOpen.value = true
+                return data
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
 }
 </script>
+
+<style>
+.continue-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 20px;
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    text-decoration: none; /* Remove default underline */
+    font-size: 16px; /* Set the font size */
+    border-radius: 5px; /* Add some border-radius for rounded corners */
+  }
+
+  .continue-link:hover {
+    background-color: #45a049; /* Darker green color on hover */
+  }
+</style>
