@@ -29,15 +29,15 @@
           </div>
         </div>
       </div>
-
     </div>
-
+    <AdsModal />
   </q-page>
 </template>
 
 <script setup>
 import CustomInputBar from "src/components/CustomInputBar.vue"
 import CategoryItem from "src/components/CategoryItem.vue"
+import AdsModal from "src/components/AdsModal.vue";
 import { categories } from "src/constants/constants.js"
 
 

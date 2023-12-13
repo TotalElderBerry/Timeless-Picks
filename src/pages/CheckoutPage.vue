@@ -187,7 +187,7 @@ const routeToCheckoutSuccess = async () => {
                     purchase_units: [{
                         amount: {
                             // e.g reference.price
-                            value: 12,
+                            value: currentProduct.price,
                         },
                     }],
                 });
@@ -196,6 +196,7 @@ const routeToCheckoutSuccess = async () => {
                 return actions.order.capture().then(function(orderData) {
                     // Successful capture!
                     // e.g. Inertia.post(route('order.update', reference.orderId)
+                    orders.products.push(newOrder)
                     router.push('success')
                 });
             },
