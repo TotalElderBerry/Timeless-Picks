@@ -196,7 +196,7 @@ const routeToCheckoutSuccess = async () => {
                     purchase_units: [{
                         amount: {
                             // e.g reference.price
-                            value: currentProduct.price,
+                            value: currentProduct.price+10,
                         },
                     }],
                 });
@@ -252,10 +252,10 @@ const checkoutGcash = async () => {
     body: JSON.stringify({
         data: {
         attributes: {
-            send_email_receipt: false,
+            send_email_receipt: true,
             show_description: false,
             show_line_items: true,
-            line_items: [{currency: 'PHP', amount: Math.floor(currentProduct.price * 100), name: currentProduct.name, quantity: 1}],
+            line_items: [{currency: 'PHP', amount: Math.floor((currentProduct.price+10) * 100), name: currentProduct.name, quantity: 1}],
             payment_method_types: ['gcash'],
             success_url: 'https://timeless-picks.vercel.app/products/checkout/success'
         }
@@ -284,7 +284,7 @@ const handleConfirm = async () => {
             };
 
             const data = {
-            totalAmount: { value: currentProduct.price, currency: 'PHP' },
+            totalAmount: { value: currentProduct.price+10, currency: 'PHP' },
             redirectUrl: {
                 success: `https://timeless-picks.vercel.app/products/checkout/success`,
                 failure: `https://timeless-picks.vercel.app/products/checkout/success`,
