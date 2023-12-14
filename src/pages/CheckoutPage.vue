@@ -105,7 +105,7 @@
 </div>
 
 <q-dialog v-model="isModalOpen" v-if="!isLoading" >
-    <div v-if="paymentOption.option === 'Paymaya'">
+    <div v-if="paymentOption.option === 'Paymaya' || paymentOption.option === 'Gcash'">
       <q-card class="row">
         <q-card-section class="">
           <div class="text-h6">You will be directed to a new tab</div>
@@ -171,10 +171,19 @@ const routeToCheckoutSuccess = async () => {
                 
             }
         }, 300);
-    }else if(paymentOption.option !== 'Paypal'){
-        orders.products.push(newOrder)
-        router.push('success')
-    }else{
+    }else if(paymentOption.option === 'Gcash'){
+        Loading.show({message: 'Please Wait'})
+        setTimeout(async() => {
+            try {
+                await checkoutGcash()
+                Loading.hide()
+                orders.products.push(newOrder)
+            } catch (error) {
+                
+            }
+        }, 300);
+        // router.push('success')
+    }else if(paymentOption.option === 'Paypal'){
         isModalOpen.value = true
         try {
         const paypal = await loadScript({
@@ -216,6 +225,9 @@ const routeToCheckoutSuccess = async () => {
         // Add proper error handling
         console.error(error);
     }
+    }else{
+        orders.products.push(newOrder)
+        router.push('success')
     }
 }
 
@@ -225,6 +237,41 @@ const routeToPaymentOptions = () => {
 
 const routeToDeliveryOptions = () => {
     router.push({name: 'delivery-options'})
+}
+
+const checkoutGcash = async () => {
+    isLoading.value = true
+    const url = 'https://api.paymongo.com/v1/checkout_sessions';
+    const options = {
+    method: 'POST',
+    headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: 'Basic c2tfdGVzdF8yUU5OOWpYUnBtaTRodUIzVUR2a2lmNUs6c2tfdGVzdF8yUU5OOWpYUnBtaTRodUIzVUR2a2lmNUs='
+    },
+    body: JSON.stringify({
+        data: {
+        attributes: {
+            send_email_receipt: false,
+            show_description: false,
+            show_line_items: true,
+            line_items: [{currency: 'PHP', amount: Math.floor(currentProduct.price * 100), name: currentProduct.name, quantity: 1}],
+            payment_method_types: ['gcash'],
+            success_url: 'https://timeless-picks.vercel.app/products/checkout/success'
+        }
+        }
+    })
+    };
+
+    fetch(url, options)
+    .then(res => res.json())
+    .then(json => {
+        console.log(json.data.attributes.checkout_url)
+        link.value = json.data.attributes.checkout_url
+        isLoading.value = false
+        isModalOpen.value = true    
+    })
+    .catch(err => console.error('error:' + err));
 }
 
 const handleConfirm = async () => {

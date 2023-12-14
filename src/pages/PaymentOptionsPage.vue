@@ -60,7 +60,7 @@
         {name: 'Paypal', img:'https://cdn-icons-png.flaticon.com/512/174/174861.png'},
         {name: 'Paymaya', img:'https://sa.kapamilya.com/absnews/abscbnnews/media/2019/business/07/08/paymaya-logo.jpg'},
     ])
-    const payment = ref('Gcash')
+    const payment = ref(paymentOption.option)
     const router = useRouter()
     const handleConfirm = async () => {
         paymentOption.option = payment.value
